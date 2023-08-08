@@ -1,0 +1,9 @@
+folder structure
+- public/
+- src/
+--- assets/
+--- hooks/
+--- pages/
+----- index.ts
+----- components/
+------- index.ts

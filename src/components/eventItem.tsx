@@ -13,5 +13,5 @@ const EventItem = () => {
         </div>
     )
 }
-
+ 
 export default EventItem;

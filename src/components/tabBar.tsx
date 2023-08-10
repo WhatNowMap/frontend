@@ -7,7 +7,7 @@ import icon_profile from "../assets/images/icon-profile.svg";
 
 const TabBar = () => {
     return (
-        <nav className="fixed bottom-0 h-20 w-full flex flex-row justify-around items-end bg-gray-800 pb-4">
+        <nav className="fixed bottom-0 h-20 w-full flex flex-row justify-around items-end bg-gray-800 pb-6">
             <div className="">
                 <img src={icon_map} className="w-8 h-8" />
             </div>

@@ -14,11 +14,9 @@
 
 |Type       |Example |Prefix |Description          |
 |-----------|--------|-------|---------------------|
-|Production |main    |N/A    |The production branch|
-|Release |release/v1.0| release/| Branches for preparation of a release / UAT|
-|Development| development| N/A |The branch for combined intermediate changes|
-|Feature| feat/JIRA-123-add-login-button| feat/[JIRA-issue-id]| A branch which is for one feature in development|
-|Bug Fix| fix/email-validation |fix/[JIRA-issue-id]| Branches for bug fixes|
+|Main| main| N/A |The main branch|
+|Feature| feat/add-login-button| feat/| A branch which is for one feature in development|
+|Bug Fix| fix/email-validation |fix/| Branches for bug fixes|
 
 ## Workflow
 
@@ -32,9 +30,6 @@
 4. Squash and Merge into Development
 5. Delete feature/bug fix branch
 
-### Hotfix
-
-1. MUST follow the hotfix procedure in Release Procedure
 
 ### Pull Request (PR)
 
@@ -45,13 +40,11 @@
 - The PR creator should fix the codes based on suggestions, and let others review again.
 - Code coverage should retain between PRs
 
-### development ↔ release ↔ main branch
+
+
+### feat/fix/chore/… branch → main branch
 
 1. After a PR is approved, the PR creator SHOULD merge the pull request using **Create a merge commit**
-
-### feat/fix/chore/… branch → development branch
-
-1. After a PR is approved, the PR creator SHOULD merge the pull request using **Squash and merge**
 
 
 ## Commit Guide

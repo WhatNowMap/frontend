@@ -5,7 +5,7 @@ const ListView = () => {
     return (
         <>
         <EventItem 
-            title="Code Til' You Drop Party"
+            title="Code 'Til You Drop Party"
             location="164 Eglinton Ave E, Toronto, ON M4P 1A6"
             category="Entertainment"
             likes={520}
@@ -14,7 +14,7 @@ const ListView = () => {
             bookmark={true}
         />
         <EventItem 
-            title="Code Til' You Drop Party"
+            title="Code 'Til You Drop Party"
             location="164 Eglinton Ave E, Toronto, ON M4P 1A6"
             category="Entertainment"
             likes={520}
@@ -23,7 +23,7 @@ const ListView = () => {
             bookmark={true}
         />
         <EventItem 
-            title="Code Til' You Drop Party"
+            title="Code 'Til You Drop Party"
             location="164 Eglinton Ave E, Toronto, ON M4P 1A6"
             category="Entertainment"
             likes={520}
@@ -32,7 +32,7 @@ const ListView = () => {
             bookmark={false}
         />
         <EventItem 
-            title="Code Til' You Drop Party"
+            title="Code 'Til You Drop Party"
             location="164 Eglinton Ave E, Toronto, ON M4P 1A6"
             category="Entertainment"
             likes={520}
@@ -41,7 +41,7 @@ const ListView = () => {
             bookmark={false}
         />
         <EventItem 
-            title="Code Til' You Drop Party"
+            title="Code 'Til You Drop Party"
             location="164 Eglinton Ave E, Toronto, ON M4P 1A6"
             category="Entertainment"
             likes={520}

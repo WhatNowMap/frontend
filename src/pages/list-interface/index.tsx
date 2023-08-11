@@ -8,7 +8,7 @@ const ListView = () => {
         <EventItem/>
 
 
-        <TabBar/>
+        <TabBar highlight="profile"/>
         </>
     )
 

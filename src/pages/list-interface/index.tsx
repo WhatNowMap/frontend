@@ -1,4 +1,5 @@
 import EventItem from "../../components/eventItem";
+import TabBar from "../../components/tabBar";
 
 const ListView = () => {
 
@@ -49,6 +50,9 @@ const ListView = () => {
             time={Date.now() - Math.floor(Math.random()*10000000)}
             bookmark={true}
         />
+        
+        
+        <TabBar highlight="profile"/>
         </>
     )
 

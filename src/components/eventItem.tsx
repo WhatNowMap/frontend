@@ -37,10 +37,10 @@ const EventItem = (props: EvenItemProps) => {
 
     const content = (
         <>
-            <div className="w-1/3 h-24 bg-gray-500 me-2">
+            <div className="w-1/3 h-24 bg-secondary-500 me-2">
                 <img src={props.image ? props.image : "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Toronto_Skyline_Summer_2020.jpg/320px-Toronto_Skyline_Summer_2020.jpg"} className="w-full h-24 object-cover" />
             </div>
-            <div className="w-2/3 flex flex-col text-gray-900 relative">
+            <div className="w-2/3 flex flex-col text-secondary-900 relative">
                 <div className="absolute top-0 right-0">
                     {
                     props.bookmark 
@@ -48,22 +48,22 @@ const EventItem = (props: EvenItemProps) => {
                     : <img src={icon_bookmark_off} />
                     }
                 </div>
-                <div className="text-xs text-gray-300">{props.category}</div>
-                <div className="font-bold text-gray-100">{props.title}</div>
-                <div className="text-[8pt] text-gray-300">
+                <div className="text-xs text-secondary-300">{props.category}</div>
+                <div className="font-bold text-secondary-100">{props.title}</div>
+                <div className="text-[8pt] text-secondary-300">
                     <img className="h-4 mt-1 float-left me-1"  src={icon_location_logo} />
                     {props.location}
                 </div>
                 <div className="w-full h-full flex flex-row grow items-end">
                     <div className="flex flex-row items-center me-4">
                         <img className="h-3 w-3" src={icon_thumb_up} />
-                        <div className="text-xs ms-1 text-gray-200">{props.likes}</div>
+                        <div className="text-xs ms-1 text-secondary-200">{props.likes}</div>
                     </div>
                     <div className="flex flex-row items-center me-4">
                         <img className="h-3 w-3" src={icon_thumb_down} />
-                        <div className="text-xs ms-1 text-gray-200">{props.dislikes}</div>
+                        <div className="text-xs ms-1 text-secondary-200">{props.dislikes}</div>
                     </div>
-                    <div className="text-end text-sm grow text-gray-200">
+                    <div className="text-end text-sm grow text-secondary-200">
                         {timelapse}
                     </div>
                 </div>
@@ -73,12 +73,12 @@ const EventItem = (props: EvenItemProps) => {
 
     return props.link 
         ? (
-            <Link to={props.link} className="w-full box-border flex flex-row px-4 py-2 bg-gray-900 hover:bg-gray-800">
+            <Link to={props.link} className="w-full box-border flex flex-row px-4 py-2 bg-secondary-700 hover:bg-secondary-600">
                 {content}
             </Link>
         )
         : (
-            <div className="w-full box-border flex flex-row px-4 py-2 bg-gray-900">
+            <div className="w-full box-border flex flex-row px-4 py-2 bg-secondary-700 hover:bg-secondary-600">
                 {content}
             </div>
         )

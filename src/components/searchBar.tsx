@@ -35,13 +35,7 @@ const SearchBar = (props: SearchBarProps) => {
                     <div className="w-2 sticky right-0 top-0 z-50 inline-block bg-gradient-to-l from-secondary-700 before:content-['.'] before:invisible flex-shrink-0"></div>
                 </div>
             </div>
-
-
         </div>
-
-
-
-
     )
 }
  

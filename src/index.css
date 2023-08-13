@@ -16,7 +16,7 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  @apply  bg-primary-700  no-scrollbar
+  @apply  h-screen max-h-screen bg-primary-700  overflow-hidden
 }
 
 #root {

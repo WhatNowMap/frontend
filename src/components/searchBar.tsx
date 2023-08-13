@@ -1,6 +1,6 @@
 import * as defaults from "../utils/constants";
 import logo from "../assets/images/logo-circle.svg";
-import filter from "../assets/images/icon-filter.svg";
+import sort from "../assets/images/icon-sort.svg";
 import cat_accident from "../assets/images/icon-cat-acident.svg"
 import cat_art from "../assets/images/icon-cat-art.svg"
 import cat_entertainment from "../assets/images/icon-cat-entertainment.svg"
@@ -19,15 +19,15 @@ const SearchBar = (props: SearchBarProps) => {
 
 
     return (
-        <div className="fixed w-full top-0 z-40">
-            <div className="w-full bg-primary-700 p-4">
+        <div className="fixed top-0 w-full z-40">
+            <div className="w-full bg-primary-700 px-4 py-2">
                 <div className="relative">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
                         <img src={logo} className="w-7 h-7" />
                     </div>
                     <input type="text" id="search" className="bg-white border border-secondary-300 text-secondary-800 text-md rounded-3xl focus:ring-primary-300 focus:border-primary-300 block w-full px-14 p-2.5" placeholder="Search" />
                     <div className="absolute inset-y-0 right-0 flex items-center pr-4 cursor-pointer">
-                        <img src={filter} className="w-10 h-10 p-2" />
+                        <img src={sort} className="w-10 h-10 p-2" />
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@ const SearchBar = (props: SearchBarProps) => {
                 {
                     defaults.Categories.map((category) => {
                         return (
-                            <div className="flex flex-row items-center justify-center mx-1 py-1.5 px-5 text-xs font-bold rounded-full bg-white text-secondary-700 hover:bg-primary-700 hover:text-white" key={category}>
+                            <div className="flex flex-row items-center justify-center mx-1 py-1.5 px-5 text-xs font-bold rounded-full bg-white text-secondary-700" key={category}>
                                 <img src={"/src/assets/images/icon-cat-"+ category.toLowerCase() + ".svg"} alt={category} className="w-4 h-4 text-primary-700 fill-current"/>
                                 <span className="ps-2">{category}</span>
                             </div>

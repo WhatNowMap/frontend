@@ -16,7 +16,7 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  @apply h-full bg-primary-700
+  @apply  bg-primary-700  no-scrollbar
 }
 
 #root {

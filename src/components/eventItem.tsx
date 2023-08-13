@@ -73,12 +73,12 @@ const EventItem = (props: EvenItemProps) => {
 
     return props.link 
         ? (
-            <Link to={props.link} className="w-full box-border flex flex-row px-4 py-2 bg-secondary-700 hover:bg-secondary-600">
+            <Link to={props.link} className="w-full box-border flex flex-row px-4 py-4 bg-secondary-700">
                 {content}
             </Link>
         )
         : (
-            <div className="w-full box-border flex flex-row px-4 py-2 bg-secondary-700 hover:bg-secondary-600">
+            <div className="w-full box-border flex flex-row px-4 py-4 bg-secondary-700">
                 {content}
             </div>
         )

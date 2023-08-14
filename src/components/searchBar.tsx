@@ -4,6 +4,7 @@ import sort from "../assets/images/icon-sort.svg";
 import { useState } from "react";
 
 interface SearchBarProps {
+    keyword?: string,
     sort?: boolean
     onSort?: (e: React.ChangeEvent)=>{},
     onSearch?: (e: React.ChangeEvent)=>{}
@@ -14,7 +15,6 @@ interface SearchBarProps {
 const SearchBar = (props: SearchBarProps) => {
     const [sortMenuState, setSortMenuState] = useState("h-0 py-0 top-8 ");
     
-
     const toggleSortingMenu = () => {
         if (sortMenuState == "h-48 py-2 top-11 ")
             setSortMenuState("h-0 py-0 top-8 ");
@@ -29,15 +29,15 @@ const SearchBar = (props: SearchBarProps) => {
                     <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
                         <img src={logo} className="w-7 h-7" />
                     </div>
-                    <input type="text" id="search" onChange={props.onSearch} className="h-11 bg-white text-secondary-800 text-md rounded-3xl focus:ring-primary-300 focus:border-primary-300 block w-full px-14 p-2.5" placeholder="Search" />
+                    <input type="text" id="search" defaultValue={props.keyword} onChange={props.onSearch} autoComplete="off" className="h-11 bg-white text-secondary-800 text-md rounded-3xl focus:ring-primary-300 focus:border-primary-300 block w-full px-14 p-2.5" placeholder="Search" />
                     <div className="absolute inset-y-0 right-0 flex items-center pr-4 cursor-pointer">
-                        <img src={sort} className="w-10 h-10 p-2 hover:bg-primary-200 rounded-full" onClick={toggleSortingMenu} />
+                        <img src={sort} onClick={toggleSortingMenu} className="w-10 h-10 p-2 hover:bg-primary-200 rounded-full" />
                     </div>
 
                     <div className={sortMenuState + " absolute right-0 z-50 overflow-hidden rounded-lg transition-all"}>
-                        <div className="px-0 overflow-hidden rounded-md bg-secondary-100 border-2 border-secondary-300">
-                            <div className="h-6 px-3 py-1 text-secondary-500 text-xs font-bold">
-                                Sort by:
+                        <div className="px-0 overflow-hidden rounded-md bg-secondary-100 border-[1px] border-secondary-300">
+                            <div className="h-6 px-3 py-1 bg-secondary-800 text-white text-xs font-bold">
+                                Sort by
                             </div>
                             <fieldset>
                                 <div className="flex items-center border-b-2 border-secondary-200">

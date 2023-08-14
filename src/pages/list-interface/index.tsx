@@ -1,12 +1,17 @@
+import { useParams } from "react-router-dom";
+import { useState } from "react";
 import EventItem from "../../components/eventItem";
 import SearchBar from "../../components/searchBar";
 import TabBar from "../../components/tabBar";
 
-const ListView = () => {
 
+const ListView = () => {
+    let {keyword} = useParams();
+    
     return (
         <div className="flex flex-col h-[100dvh] max-h-[100dvh]">
-            <SearchBar />
+            <SearchBar keyword={keyword} />
+            
             <div className="flex-grow overflow-y-scroll no-scrollbar mt-24 mb-16">
                     <EventItem 
                         title="Code 'Til You Drop Party"

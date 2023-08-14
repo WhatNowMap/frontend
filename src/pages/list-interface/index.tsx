@@ -7,7 +7,6 @@ const ListView = () => {
     return (
         <div className="flex flex-col h-[100dvh] max-h-[100dvh]">
             <SearchBar />
-
             <div className="flex-grow overflow-y-scroll no-scrollbar mt-24 mb-16">
                     <EventItem 
                         title="Code 'Til You Drop Party"

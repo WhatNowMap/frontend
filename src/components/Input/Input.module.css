@@ -1,0 +1,72 @@
+@import '/src/assets/color.css';
+
+.errorMsg {
+    color: red;
+    
+}
+.searchInput{
+    position: relative;
+}
+.searchInput > button{
+    position: absolute;
+    left:85%;
+    height:100%;
+    top:55%;
+    transform: translate(-50%,-50%); 
+    
+}
+.searchInput > button > img{
+    height:70%
+}
+
+
+.searchInput input{
+    border: 0;
+    border-radius: 50px;
+    height:100%;
+    padding: 0 40px 0 1em;
+    font-size: .7rem;
+}
+
+.Input{
+    position: relative;
+}
+
+
+.checkbox {
+    display: flex;
+    align-items: center;
+  }
+
+input[type='checkbox']{
+    appearance: none;
+    cursor: pointer;
+    appearance: auto;
+}
+
+
+
+.Input input {
+    width: 100%;
+    padding: 10px 20px 10px 20px;
+    min-width: 100px;
+    min-height: 45px;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--color--white);
+    margin: 5px 0;
+}
+
+.commentInput input{
+    width:100%;
+    border-radius: 20px;
+    border: 1px solid rgb(230,230,230);
+    background-color:#FAFAFA;
+    padding: 0px 12px;
+    margin: 5px 0;
+}
+
+input[type="file"] {
+    display: none;
+}

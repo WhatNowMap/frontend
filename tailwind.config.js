@@ -7,6 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        current: 'currentColor',
         /* WhatNow purple */
         'primary': {
           100: '#d0cadb',
@@ -31,8 +32,7 @@ export default {
           800: '#20252b',
           900: '#02080f',
         },
-    },
-      // ...
+      },
     },
   },
   plugins: [],

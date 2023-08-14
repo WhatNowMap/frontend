@@ -1,6 +1,7 @@
 import * as defaults from "../utils/constants";
 import logo from "../assets/images/logo-circle.svg";
 import sort from "../assets/images/icon-sort.svg";
+import Icon from "./icon"
 import { useState } from "react";
 
 interface SearchBarProps {
@@ -10,16 +11,14 @@ interface SearchBarProps {
     onSearch?: (e: React.ChangeEvent)=>{}
 }
 
-
-
 const SearchBar = (props: SearchBarProps) => {
     const [sortMenuState, setSortMenuState] = useState("h-0 py-0 top-8 ");
     
     const toggleSortingMenu = () => {
-        if (sortMenuState == "h-48 py-2 top-11 ")
+        if (sortMenuState == "h-48 py-2 top-10 ")
             setSortMenuState("h-0 py-0 top-8 ");
         else 
-            setSortMenuState("h-48 py-2 top-11 ");
+            setSortMenuState("h-48 py-2 top-10 ");
     }
 
     return (
@@ -83,10 +82,21 @@ const SearchBar = (props: SearchBarProps) => {
                 {
                     defaults.Categories.map((category) => {
                         return (
-                            <div className="flex flex-row items-center justify-center mx-1 py-1.5 px-5 text-xs font-bold rounded-full bg-white text-secondary-700" key={category}>
-                                <img src={"/src/assets/images/icon-cat-"+ category.toLowerCase() + ".svg"} alt={category} className="w-4 h-4 text-primary-700 fill-current"/>
-                                <span className="ps-2">{category}</span>
+                            // <div className="flex flex-row items-center justify-center mx-1 py-1.5 px-5 text-xs font-bold rounded-full bg-white text-secondary-700" key={category}>
+                            //     <img src={"/src/assets/images/icon-cat-"+ category.toLowerCase() + ".svg"} alt={category} className="w-4 h-4 text-primary-700 fill-current"/>
+                            //     <span className="ps-2">{category}</span>
+                            // </div>
+
+                            <div className="" key={category}>
+                                <input id={category} type="checkbox" name="category" value={category} className="w-0 h-0 peer checked hidden" />
+                                <label htmlFor={category} className="flex flex-row items-center justify-center py-1.5 px-5 mx-1 text-xs font-bold rounded-full bg-white text-secondary-700 peer-checked:bg-primary-600 peer-checked:text-white">
+                                <Icon type={category.toLowerCase()} className="w-4 h-4 mr-1 text-primary-700 fill-current"/>
+                                {/* <img src={"/src/assets/images/icon-cat-"+ category.toLowerCase() + ".svg"} alt={category} className="w-4 h-4 mr-1 text-primary-700 fill-current"/> */}
+                                {category}
+                                </label>
                             </div>
+
+
                         )
                     })
                 }

@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
 import EventItem from "../../components/eventItem";
 import SearchBar from "../../components/searchBar";
 import TabBar from "../../components/tabBar";

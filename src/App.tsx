@@ -17,6 +17,7 @@ const router = createBrowserRouter(
       <Route index element={<LandingPage />} />
       <Route path="/register" element={<UserRegisterOrLogin />} />
       <Route path="/list" element={<ListView />} />
+      <Route path="/list/:keyword" element={<ListView />} />
       <Route path="/event" element={<EventDetail />} />
     </Route>
   )

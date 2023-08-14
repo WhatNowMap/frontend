@@ -17,3 +17,16 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+.tab-highlight:after {
+  content: '';
+  height: 5px;
+  width: 5px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: -8px;
+}

@@ -58,8 +58,6 @@ const Icon = (props: IconProps) => {
         "bookmark-fill": <HiBookmark className={props.className} />,
     }
 
-
-    console.log(props.type);
     return icons[props.type];
 
 }

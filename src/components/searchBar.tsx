@@ -75,11 +75,15 @@ const SearchBar = (props: SearchBarProps) => {
                         <img src={logo} className="w-7 h-7" />
                     </div>
                     <input type="text" id="keyword" name="keyword" defaultValue={props.keyword} autoComplete="off" className="h-10 bg-white text-secondary-800 text-md rounded-3xl focus:ring-primary-300 focus:border-primary-300 block w-full px-14 p-2.5" placeholder="Search" />
-                    <div className="absolute inset-y-0 right-4 flex items-center pr-4 cursor-pointer">
-                        <img src={sort} 
-                            onClick={toggleSortingMenu} 
-                            className={sortMenuState.sortIconStyle + "w-8 h-8 p-1 rounded-full"} />
-                    </div>
+                    {
+                    props.sort && (
+                        <div className="absolute inset-y-0 right-4 flex items-center pr-4 cursor-pointer">
+                            <img src={sort} 
+                                onClick={toggleSortingMenu} 
+                                className={sortMenuState.sortIconStyle + "w-8 h-8 p-1 rounded-full"} />
+                        </div>
+                        )
+                    }
 
                     <div className={sortMenuState.sortMenuStyle + " absolute right-4 z-50 overflow-hidden rounded-lg transition-all duration-300"}>
                         <div className="px-0 overflow-hidden rounded-md bg-secondary-100 border-[1px] border-secondary-300">
@@ -126,11 +130,6 @@ const SearchBar = (props: SearchBarProps) => {
                 {
                     defaults.Categories.map((category) => {
                         return (
-                            // <div className="flex flex-row items-center justify-center mx-1 py-1.5 px-5 text-xs font-bold rounded-full bg-white text-secondary-700" key={category}>
-                            //     <img src={"/src/assets/images/icon-cat-"+ category.toLowerCase() + ".svg"} alt={category} className="w-4 h-4 text-primary-700 fill-current"/>
-                            //     <span className="ps-2">{category}</span>
-                            // </div>
-
                             <div className="" key={category}>
                                 <input 
                                     type="checkbox" 
@@ -144,8 +143,6 @@ const SearchBar = (props: SearchBarProps) => {
                                     {category}
                                 </label>
                             </div>
-
-
                         )
                     })
                 }

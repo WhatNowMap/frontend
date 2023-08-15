@@ -6,6 +6,13 @@ export const Categories = [
     "Food", 
     "Party", 
     "Accident", 
-    "Nerd"
+    "Nerd",
+    ] as const;
+
+export const SortingCriteria = [
+    "Recommended", 
+    "Distance", 
+    "Freshness", 
+    "Attendees",
     ] as const;
 

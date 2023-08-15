@@ -60,7 +60,6 @@ const Icon = (props: IconProps) => {
         "car-fill": <BsCarFrontFill className={props.className} />,
     }
 
-
     return icons[props.type];
 
 }

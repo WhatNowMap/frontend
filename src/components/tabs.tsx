@@ -1,6 +1,7 @@
 import { TabPanel, useTabs } from "react-headless-tabs";
 import { TabSelector } from "./tabSelector";
-import Icon from "./icon"
+import Comments from "./comment";
+import Icon from "./icon";
 
 const Tabs = () => {
     const [selectedTab, setSelectedTab] = useTabs(["details","comments",]);
@@ -55,9 +56,17 @@ const Tabs = () => {
                     </div>
                 </TabPanel>
                 <TabPanel hidden={selectedTab !== "comments"}>
-                    <div className="p-6">
-                        <div className="text-xl font-bold">Reviews</div>
-
+                        <div className="p-6">
+                            <div className="text-xl font-bold">Reviews</div>
+                                <Comments
+                                    username="User"
+                                    profileImg="../src/assets/images/icon-profile.svg"
+                                    likes={4}
+                                    time={123}
+                                    comment="Test"
+                                />
+                            <div>
+                        </div>
                     </div>
                 </TabPanel>
             </div>

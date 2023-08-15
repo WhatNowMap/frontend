@@ -12,12 +12,12 @@ const EventDetail = () => {
                     <div className="text-white font-bold text-2xl col-span-2">
                         Event Name
                     </div>
-                    <div className="justify-self-end flex gap-2">
+                    <div className="justify-self-end flex gap-3">
                         <div>
-                            <Icon type={"bookmark"} className="w-8 h-8 mr-1 text-secondary-100 "/>
+                            <Icon type={"bookmark"} className="w-7 h-7 mr-1 text-secondary-100 "/>
                         </div>
                         <div>
-                            <Icon type={"share"} className="w-8 h-8 mr-1 text-secondary-100"/>
+                            <Icon type={"share"} className="w-7 h-7 mr-1 text-secondary-100"/>
                         </div>
                     </div>
                 </div>
@@ -32,7 +32,8 @@ const EventDetail = () => {
                             0
                         </div>
                         <div className="flex items-center px-4">
-                            
+                            <Icon type={"people"} className="w-6 h-6 mr-2 text-secondary-300 fill-current"/>
+                            <span className="text-secondary-200">232</span>
                         </div>
                     </div>
                     <div className="justify-self-end flex">

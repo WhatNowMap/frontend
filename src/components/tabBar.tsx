@@ -12,21 +12,21 @@ interface TabBarProps {
 
 const TabBar = (props: TabBarProps) => {
     return (
-        <nav className="fixed bottom-0 w-full h-16 flex flex-row justify-around items-end bg-secondary-800 pt-2 pb-4 z-50">
+        <nav className="fixed bottom-0 w-full h-14 flex flex-row justify-around items-center bg-secondary-800 py-4 z-50">
             <Link to="/map" className={"relative " + (props.highlight=="map" && "tab-highlight")}>
-                <img src={icon_map} className="w-8 h-8" />
+                <img src={icon_map} className="w-6 h-6" />
             </Link>
             <Link to="/list" className={"relative " + (props.highlight=="list" && "tab-highlight")}>
-                <img src={icon_list} className="w-8 h-8" />
+                <img src={icon_list} className="w-6 h-6" />
             </Link>
             <Link to="/create" className={"relative " + (props.highlight=="create" && "tab-highlight")}>
                 <img src={icon_create} className="w-10 h-10" />
             </Link>
             <Link to="/bookmark" className={"relative " + (props.highlight=="bookmark" && "tab-highlight")}>
-                <img src={icon_bookmark} className="w-8 h-8" />
+                <img src={icon_bookmark} className="w-6 h-6" />
             </Link>
             <Link to="/profile" className={"relative " + (props.highlight=="profile" && "tab-highlight")}>
-                <img src={icon_profile} className="w-8 h-8" />
+                <img src={icon_profile} className="w-6 h-6" />
             </Link>
         </nav>
     )

@@ -10,17 +10,23 @@ import UserRegisterOrLogin from "./pages/register-login-page";
 import RootLayout from "./pages/root-layout";
 import ListView from "./pages/list-interface";
 import EventDetail from "./pages/event-detail";
-import UserProfile from "./pages/user-profile";
-import EventHistory from "./components/user-profile-and-setting/eventHistory";
+import MapView from "./pages/map-interface";
+import UserProfileAndSetting from "./components/user-profile-and-setting/userProfileAndSetting";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<LandingPage />} />
       <Route path="/register" element={<UserRegisterOrLogin />} />
+      <Route path="/map" element={<MapView />} />
+      <Route path="/map/:category" element={<MapView />} />
+      <Route path="/map/:category/:keyword" element={<MapView />} />
       <Route path="/list" element={<ListView />} />
+      <Route path="/list/:category" element={<ListView />} />
+      <Route path="/list/:category/:sort/" element={<ListView />} />
+      <Route path="/list/:category/:sort/:keyword" element={<ListView />} />
       <Route path="/event" element={<EventDetail />} />
-      <Route path="/profile" element={<UserProfile />} />
+      <Route path="/profile" element={<UserProfileAndSetting />} />
     </Route>
   )
 );

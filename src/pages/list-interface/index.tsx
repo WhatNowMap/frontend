@@ -56,9 +56,9 @@ const ListView = () => {
 
     return (
         <div className="flex flex-col h-[100dvh] max-h-[100dvh]">
-            <SearchBar keyword={keyword} onSearch={handleSearch} onSort={handleSort} onCategoryChange={handleCategoryChange} />
+            <SearchBar keyword={keyword} onSearch={handleSearch} onSort={handleSort} onCategoryChange={handleCategoryChange} sort={true} />
             
-            <div className="flex-grow overflow-y-scroll no-scrollbar mt-24 mb-12 z-10">
+            <div className="flex-grow overflow-y-scroll no-scrollbar mt-[5.5rem] mb-12 z-10">
                     <EventItem 
                         title="Code 'Til You Drop Party"
                         location="164 Eglinton Ave E, Toronto, ON M4P 1A6"

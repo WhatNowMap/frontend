@@ -12,6 +12,7 @@ import ListView from "./pages/list-interface";
 import EventDetail from "./pages/event-detail";
 import MapView from "./pages/map-interface";
 import UserProfileAndSetting from "./components/user-profile-and-setting/userProfileAndSetting";
+import UserProfile from "./pages/user-profile";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,7 +27,7 @@ const router = createBrowserRouter(
       <Route path="/list/:category/:sort/" element={<ListView />} />
       <Route path="/list/:category/:sort/:keyword" element={<ListView />} />
       <Route path="/event" element={<EventDetail />} />
-      <Route path="/profile" element={<UserProfileAndSetting />} />
+      <Route path="/profile" element={<UserProfile />} />
     </Route>
   )
 );

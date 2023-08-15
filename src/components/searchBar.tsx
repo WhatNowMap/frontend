@@ -2,13 +2,14 @@ import * as defaults from "../utils/constants";
 import logo from "../assets/images/logo-circle.svg";
 import sort from "../assets/images/icon-sort.svg";
 import Icon from "./icon"
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 interface SearchBarProps {
     keyword?: string,
     sort?: boolean
-    onSort?: (e: React.ChangeEvent)=>{},
-    onSearch?: (e: React.ChangeEvent)=>{}
+    onSort?: (e: React.ChangeEvent)=> void,
+    onCategoryChange?: (e: React.ChangeEvent)=> void,
+    onSearch?: (e: FormEvent<HTMLFormElement>)=>void
 }
 
 const SearchBar = (props: SearchBarProps) => {
@@ -58,8 +59,14 @@ const SearchBar = (props: SearchBarProps) => {
         }
     }
 
+    const handleCategoryChange = (e: ChangeEvent) => {
+        if (props.onCategoryChange) {
+            props.onCategoryChange(e);
+        }
+    }
+
     return (
-        <div className="fixed top-0 w-full z-50">
+        <form className="fixed top-0 w-full z-50" onSubmit={props.onSearch}>
             <div className={sortMenuState.backdropStyle + "absolute top-0 w-screen h-screen transition-all duration-300"}></div>
 
             <div className="w-full z-50">
@@ -67,7 +74,7 @@ const SearchBar = (props: SearchBarProps) => {
                     <div className="absolute inset-y-0 left-4 flex items-center pl-4 pointer-events-none">
                         <img src={logo} className="w-7 h-7" />
                     </div>
-                    <input type="text" id="search" defaultValue={props.keyword} onChange={props.onSearch} autoComplete="off" className="h-10 bg-white text-secondary-800 text-md rounded-3xl focus:ring-primary-300 focus:border-primary-300 block w-full px-14 p-2.5" placeholder="Search" />
+                    <input type="text" id="keyword" name="keyword" defaultValue={props.keyword} autoComplete="off" className="h-10 bg-white text-secondary-800 text-md rounded-3xl focus:ring-primary-300 focus:border-primary-300 block w-full px-14 p-2.5" placeholder="Search" />
                     <div className="absolute inset-y-0 right-4 flex items-center pr-4 cursor-pointer">
                         <img src={sort} 
                             onClick={toggleSortingMenu} 
@@ -81,28 +88,28 @@ const SearchBar = (props: SearchBarProps) => {
                             </div>
                             <fieldset>
                                 <div className="flex items-center border-b-2 border-secondary-200">
-                                    <input id="recommended" type="radio" onChange={handleSortChange} name="sort" value="recommended" defaultChecked className="w-0 peer invisible" />
+                                    <input id="recommended" type="radio" onChange={handleSortChange} name="sort" value="Recommended" defaultChecked className="w-0 peer invisible" />
                                     <label htmlFor="recommended" className="block px-6 py-2 w-full bg-secondary-100 text-secondary-700 peer-checked:bg-primary-600 peer-checked:text-white text-sm font-medium">
                                     Recommended
                                     </label>
                                 </div>
 
                                 <div className="flex items-center border-b-2 border-secondary-200">
-                                    <input id="distance" type="radio" onChange={handleSortChange} name="sort" value="distance" className="w-0 peer checked invisible" />
+                                    <input id="distance" type="radio" onChange={handleSortChange} name="sort" value="Distance" className="w-0 peer invisible" />
                                     <label htmlFor="distance" className="block px-6 py-2 w-full bg-secondary-100 text-secondary-700 peer-checked:bg-primary-600 peer-checked:text-white text-sm font-medium">
                                     Distance
                                     </label>
                                 </div>
 
                                 <div className="flex items-center border-b-2 border-secondary-200">
-                                    <input id="freshness" type="radio" onChange={handleSortChange} name="sort" value="freshness" className="w-0 peer checked invisible" />
+                                    <input id="freshness" type="radio" onChange={handleSortChange} name="sort" value="Freshness" className="w-0 peer invisible" />
                                     <label htmlFor="freshness" className="block px-6 py-2 w-full bg-secondary-100 text-secondary-700 peer-checked:bg-primary-600 peer-checked:text-white text-sm font-medium">
                                     Freshness
                                     </label>
                                 </div>
 
                                 <div className="flex items-center">
-                                    <input id="attendees" type="radio" onChange={handleSortChange} name="sort" value="attendees" className="w-0 peer checked invisible" />
+                                    <input id="attendees" type="radio" onChange={handleSortChange} name="sort" value="Attendees" className="w-0 peer invisible" />
                                     <label htmlFor="attendees" className="block px-6 py-2 w-full bg-secondary-100 text-secondary-700 peer-checked:bg-primary-600 peer-checked:text-white text-sm font-medium">
                                     Attendees
                                     </label>
@@ -125,8 +132,14 @@ const SearchBar = (props: SearchBarProps) => {
                             // </div>
 
                             <div className="" key={category}>
-                                <input id={category} type="checkbox" name="category" value={category} className="w-0 h-0 peer checked hidden" />
-                                <label htmlFor={category} className="flex flex-row items-center py-1.5 px-3 mx-1 text-sm font-bold rounded-full bg-white text-secondary-700 peer-checked:bg-primary-600 peer-checked:text-white">
+                                <input 
+                                    type="checkbox" 
+                                    id={category} 
+                                    name={category}
+                                    value="1"
+                                    onChange={handleCategoryChange}
+                                    className="w-0 h-0 peer checked hidden" />
+                                <label htmlFor={category} className="flex flex-row items-center py-1 px-3 mx-1 text-sm font-bold rounded-full bg-white text-secondary-700 peer-checked:bg-primary-600 peer-checked:text-white">
                                     <Icon type={category.toLowerCase()} className="w-5 h-5 mr-1 text-inherit"/>
                                     {category}
                                 </label>
@@ -139,7 +152,7 @@ const SearchBar = (props: SearchBarProps) => {
                     <div className="w-2 sticky right-0 top-0 z-10 inline-block bg-gradient-to-l from-secondary-700 before:content-['.'] before:invisible flex-shrink-0"></div>
                 </div>
             </div>
-        </div>
+        </form>
     )
 }
  

@@ -12,7 +12,7 @@ interface TabBarProps {
 
 const TabBar = (props: TabBarProps) => {
     return (
-        <nav className="fixed bottom-0 w-full h-16 flex flex-row justify-around items-center bg-secondary-800 py-4 z-50">
+        <nav className="fixed bottom-0 w-full h-14 flex flex-row justify-around items-center bg-secondary-800 py-4 z-50">
             <Link to="/map" className={"relative " + (props.highlight=="map" && "tab-highlight")}>
                 <img src={icon_map} className="w-6 h-6" />
             </Link>

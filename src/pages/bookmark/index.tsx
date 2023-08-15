@@ -1,12 +1,16 @@
 import EventItem from "../../components/eventItem";
-import SearchBar from "../../components/searchBar";
+
+import Header from "../../components/header";
 import TabBar from "../../components/tabBar";
 
 const ListView = () => {
 
     return (
         <div className="flex flex-col h-[100dvh] max-h-[100dvh]">
-            <SearchBar />
+            <Header 
+            Header_title={"Bookmark"} 
+            arrow={true}
+            />
             <div className="flex-grow overflow-y-scroll no-scrollbar mt-24 mb-16">
                     <EventItem 
                         title="Code 'Til You Drop Party"

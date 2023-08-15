@@ -13,8 +13,8 @@ export const TabSelector = ({
     className={`group inline-flex items-center px-6 py-4 border-b-4 leading-5  cursor-pointer whitespace-nowrap 
     ${
       isActive
-        ? "border-[#219EBC] text-[#4FD5FF] focus:text-[#219EBC]"
-        : "border-transparent text-white "
+        ? "border-primary-400 text-primary-300 focus:text-primary-300 font-semibold"
+        : "border-transparent text-white font-semibold"
         }
     `}
     onClick={onClick}

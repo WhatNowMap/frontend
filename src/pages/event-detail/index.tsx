@@ -1,6 +1,5 @@
 import React from "react";
 import TabBar from "../../components/tabBar";
-import Report from "../../Popup/Report";
 import EventDetails from "../../components/eventDetail";
 
 
@@ -11,9 +10,6 @@ const EventDetail = () => {
          <div className="flex flex-col h-[100dvh] max-h-[100dvh]">
             <div className="flex-grow overflow-y-scroll no-scrollbar mb-14">
                 <EventDetails/>
-            </div>
-            <div>
-                <Report />
             </div>
             <TabBar highlight="list"/>
         </div>

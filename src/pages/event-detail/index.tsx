@@ -3,15 +3,11 @@ import icon_thumb_up from "../../assets/images/icon-thumb-up.svg";
 import icon_thumb_down from "../../assets/images/icon-thumb-down.svg";
 import icon_bookmark from "../../assets/images/icon-bookmark.svg";
 import React from "react";
-import Report from "../../assets/Popup/Report";
+import Report from "../../Popup/Report";
 
 const EventDetail = () => {
 
-    const [dialogIsOpen, setDialogIsOpen] = React.useState(false);
 
-    const openDialog = () => setDialogIsOpen(true);
-  
-    const closeDialog = () => setDialogIsOpen(false);
     return(
         <div className="w-full ">
             <div>
@@ -45,7 +41,7 @@ const EventDetail = () => {
                 </div>
             </div>
             <div>
-            <Report open={dialogIsOpen} onClose={closeDialog} />
+            <Report  />
 
         
             </div>

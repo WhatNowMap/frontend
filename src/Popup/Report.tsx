@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
 
@@ -10,25 +9,30 @@ import styled from 'styled-components';
 const mainColor = 'indianred'
 
 const Button = styled.button`
-  color: red;
-  font-size: 2.8em;
+  color: white;
+  font-size: 16px;
   border-bottom: 1px solid ${mainColor};
   display: inline-block;
 `;
 
 
-const Report = (props: { onClose?: any; open?: any; }) =>{
+const Report = () =>{
    
-    const { open, onClose } = props
+  const [isOpen, setIsOpen] = useState(false);
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+   
+  }
+  
   
   
     return(
         <>
-        {/* // onClose={onClose} */}
-  <Popup  open={open}
-    onClose={onClose}   trigger={<Button className='' >Report</Button>} position="right center">
+      
+        <Button   onClick={togglePopup}   >Report</Button>
     
-   
+        {isOpen &&
     <div className="popup-box">
       <div className="box">
        <h1>Report</h1>
@@ -38,13 +42,14 @@ const Report = (props: { onClose?: any; open?: any; }) =>{
         <button className='report-button'>Threats</button><br></br>
        </div>
        <div>
-        <button className='report-submit' onClick={props.onClose}>Submit</button>
+        <button className='report-submit'       onClick={togglePopup}>Submit</button>
+     
        </div>
       
       </div>
     </div>
-
-    </Popup>
+}
+   
         </>
     )
    

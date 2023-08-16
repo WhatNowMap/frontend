@@ -18,12 +18,13 @@ const header = (props: HeaderProps) => {
             <div className="w-full bg-primary-700 px-4 py-2">
                 <div className="relative">
                 {
-                    props.arrow 
-                    ?  <Link to="/list" className="absolute " >
+                    props.arrow &&
+                     <Link to="/list" className="absolute " >
                     <img src={arrow} className="w-7 h-7 relative top-[10px]" />
                     </Link>
-                    :  <></>
                     }
+    
+
                       <div className="block text-white px-14 p-2.5">
                     {props.Header_title}
                     </div>

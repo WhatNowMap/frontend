@@ -9,7 +9,7 @@ const ListView = () => {
         <div className="flex flex-col h-[100dvh] max-h-[100dvh]">
             <Header 
             Header_title={"Bookmark"} 
-            arrow={true}
+            arrow={false}
             />
             <div className="flex-grow overflow-y-scroll no-scrollbar mt-24 mb-16">
                     <EventItem 

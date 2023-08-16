@@ -11,7 +11,6 @@ import RootLayout from "./pages/root-layout";
 import ListView from "./pages/list-interface";
 import EventDetail from "./pages/event-detail";
 import MapView from "./pages/map-interface";
-import UserProfileAndSetting from "./components/user-profile-and-setting/userProfileAndSetting";
 import UserProfile from "./pages/user-profile";
 import NotFound from "./pages/not-found";
 

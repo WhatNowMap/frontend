@@ -62,7 +62,7 @@ const ListView = () => {
                     <EventItem 
                         title="Code 'Til You Drop Party"
                         location="164 Eglinton Ave E, Toronto, ON M4P 1A6"
-                        category="Entertainment"
+                        category="Nerd"
                         likes={520}
                         dislikes={134}
                         time={Date.now() - Math.floor(Math.random()*10000000)}

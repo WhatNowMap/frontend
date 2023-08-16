@@ -1,4 +1,4 @@
-import React from "react";
+
 import TabBar from "../../components/tabBar";
 import EventDetails from "../../components/eventDetail";
 

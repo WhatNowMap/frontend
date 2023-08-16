@@ -5,6 +5,7 @@ import {
 
 import {
     BsPeople,
+    BsCarFrontFill,
 } from 'react-icons/bs'; 
 
 import {
@@ -56,10 +57,9 @@ const Icon = (props: IconProps) => {
         "share": <IoShareOutline className={props.className} />,
         "bookmark": <HiOutlineBookmark className={props.className} />,
         "bookmark-fill": <HiBookmark className={props.className} />,
+        "car-fill": <BsCarFrontFill className={props.className} />,
     }
 
-
-    console.log(props.type);
     return icons[props.type];
 
 }

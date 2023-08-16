@@ -138,7 +138,7 @@ const SearchBar = (props: SearchBarProps) => {
                                     value="1"
                                     onChange={handleCategoryChange}
                                     className="w-0 h-0 peer checked hidden" />
-                                <label htmlFor={category} className="flex flex-row items-center py-1 px-3 mx-1 text-sm font-bold rounded-full bg-white/70 backdrop-blur-sm text-secondary-700 peer-checked:bg-primary-600 peer-checked:text-white">
+                                <label htmlFor={category} className="flex flex-row items-center py-1 px-3 mx-1 text-sm font-bold rounded-full bg-white/80 backdrop-blur-sm text-secondary-700 peer-checked:bg-primary-600 peer-checked:text-white">
                                     <Icon type={category.toLowerCase()} className="w-5 h-5 mr-1 text-inherit"/>
                                     {category}
                                 </label>

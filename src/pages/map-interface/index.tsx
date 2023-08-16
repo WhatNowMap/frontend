@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import * as defaults from "../../utils/constants";
 import SearchBar from "../../components/searchBar";
 import TabBar from "../../components/tabBar";
+import axios from 'axios';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
@@ -14,12 +15,13 @@ const MapView = () => {
     let {keyword, category} = useParams();
     const [formKeyword, setFormKeyword] = useState(keyword);
     const [formCategory, setFormCategory] = useState(category);
+    const [eventData, setEventData] = useState([]);
 
     const mapContainer = useRef(null);
     const map = useRef(null);
     const [lng, setLng] = useState(-79.367015);
     const [lat, setLat] = useState(43.669070);
-    const [zoom, setZoom] = useState(11);
+    const [zoom, setZoom] = useState(8);
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
@@ -30,6 +32,35 @@ const MapView = () => {
             center: [lng, lat],
             zoom: zoom
         });
+
+        // const marker1 = new mapboxgl.Marker()
+        // .setLngLat([-79.3832, 43.6532])
+        // .addTo(map.current!);
+
+        const fetchData = async () => {
+            try {
+                var hostname = window.location.hostname;
+                var urlWithoutPort = `http://${hostname}`;
+                const url = urlWithoutPort + ":8080/event";
+                const response = await axios.get(url);
+                
+                response.data.data.map((event: any) => {
+                    console.log(event.lng, event.lag);
+                    new mapboxgl.Marker()
+                        .setLngLat([event.lng, event.lag])
+                        .addTo(map.current!);
+                });
+                
+
+                setEventData(response.data.data);
+                //console.log(response.data.data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        fetchData();
+
 
         // (map.current! as mapboxgl.Map).setCenter([-79.367015, 43.669070]);
         // (map.current! as mapboxgl.Map).setZoom(11);

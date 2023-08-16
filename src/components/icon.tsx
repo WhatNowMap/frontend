@@ -3,10 +3,18 @@ import {
     RiAlarmWarningFill,
 } from 'react-icons/ri'; 
 
+import{
+    MdOutlineInsertPhoto,
+} from 'react-icons/md';
+
 import {
     BsPeople,
     BsCarFrontFill,
-} from 'react-icons/bs'; 
+} from 'react-icons/bs';
+
+import {
+    BiSend
+} from 'react-icons/bi'; 
 
 import {
     IoMdMusicalNotes,
@@ -24,7 +32,7 @@ import {
 
 import {
     AiOutlineLike,
-    AiOutlineDislike,
+    AiOutlineDislike
 } from 'react-icons/ai'; 
 
 import {
@@ -58,6 +66,8 @@ const Icon = (props: IconProps) => {
         "bookmark": <HiOutlineBookmark className={props.className} />,
         "bookmark-fill": <HiBookmark className={props.className} />,
         "car-fill": <BsCarFrontFill className={props.className} />,
+        "send": <BiSend className={props.className} />,
+        "photo": <MdOutlineInsertPhoto className={props.className} />,
     }
 
     return icons[props.type];

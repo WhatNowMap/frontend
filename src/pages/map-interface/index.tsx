@@ -24,7 +24,7 @@ const MapView = () => {
     const [zoom, setZoom] = useState(8);
 
     useEffect(() => {
-        if (map.current) return; // initialize map only once
+        //if (map.current) return; // initialize map only once
 
         (map.current! as mapboxgl.Map) = new mapboxgl.Map({
             container: mapContainer.current!,
@@ -33,19 +33,20 @@ const MapView = () => {
             zoom: zoom
         });
 
-        // const marker1 = new mapboxgl.Marker()
-        // .setLngLat([-79.3832, 43.6532])
-        // .addTo(map.current!);
-
         const fetchData = async () => {
             try {
                 var hostname = window.location.hostname;
                 var urlWithoutPort = `http://${hostname}`;
-                const url = urlWithoutPort + ":8080/event";
+                let url = urlWithoutPort + ":8080/event?";
+                if (defaults.Categories.map((i:string)=>i.toLowerCase()).includes(category as any)) {
+                    url += "category=" + category
+                }
+
                 const response = await axios.get(url);
-                
+                //console.log(url);
+
                 response.data.data.map((event: any) => {
-                    console.log(event.lng, event.lag);
+                    //console.log(event.lng, event.lag);
                     new mapboxgl.Marker()
                         .setLngLat([event.lng, event.lag])
                         .addTo(map.current!);
@@ -60,11 +61,7 @@ const MapView = () => {
         }
 
         fetchData();
-
-
-        // (map.current! as mapboxgl.Map).setCenter([-79.367015, 43.669070]);
-        // (map.current! as mapboxgl.Map).setZoom(11);
-    });
+    }, [keyword, category]);
 
     const navigate = useNavigate();
 

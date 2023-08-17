@@ -5,6 +5,7 @@ import TabBar from "../../components/tabBar";
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import axios from 'axios';
 import * as defaults from "../../utils/constants";
+import { isodate2Timestamp } from "../../utils/helper";
 
 const ListView = () => {
     let {keyword, category, sort} = useParams();
@@ -20,10 +21,14 @@ const ListView = () => {
             try {
                 var hostname = window.location.hostname;
                 var urlWithoutPort = `http://${hostname}`;
-                const url = urlWithoutPort + ":8080/event";
+                let url = urlWithoutPort + ":8080/event?";
+                if (defaults.Categories.map((i:string)=>i.toLowerCase()).includes(category as any)) {
+                    url += "category=" + category
+                }
+                //console.log(url);
+
                 const response = await axios.get(url);
                 setEventData(response.data.data);
-                //console.log(response.data.data);
             } catch (error) {
                 //console.log(error);
             }
@@ -31,7 +36,7 @@ const ListView = () => {
 
         fetchData();
 
-    });
+    }, [keyword, category, sort]);
 
     const handleSearch = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -87,10 +92,10 @@ const ListView = () => {
                                 title={event["name"]}
                                 location={event["location"]}
                                 category={event["category"]}
-                                likes={520}
-                                dislikes={134}
-                                time={1692168000000}
-                                bookmark={true}
+                                likes={(event["ranking"])["like"]}
+                                dislikes={(event["ranking"])["dislike"]}
+                                time={isodate2Timestamp(event["createdAt"])}
+                                bookmark={false}
                                 key={event["_id"]}
                             />
                         )

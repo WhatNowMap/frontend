@@ -16,7 +16,7 @@ interface EvenItemProps {
     likes: number,
     dislikes: number,
     time: number, 
-    bookmark: boolean
+    bookmark: boolean,
 }
 
 
@@ -35,7 +35,7 @@ const EventItem = (props: EvenItemProps) => {
         const hr = Math.floor(timediff/60/60);
         timelapse = hr == 1 ? "1 hr ago" : hr + " hrs ago";
     }
-
+    
     const content = (
         <>
             <div className="w-1/3 h-24 bg-secondary-500 me-2">

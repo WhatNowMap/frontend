@@ -11,6 +11,8 @@ import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 mapboxgl.accessToken =
   'pk.eyJ1Ijoid2hhdG5vd21hcCIsImEiOiJjbGw0Nnk1aTkwMXIxM2VwMGpiN3RmZ3Y5In0.O5vq93APpSPPQgPHc9VC6g';
 
+let mapMarkers: mapboxgl.Marker[] = [];
+
 const MapView = () => {
     let {keyword, category} = useParams();
     const [formKeyword, setFormKeyword] = useState(keyword);
@@ -26,12 +28,17 @@ const MapView = () => {
     useEffect(() => {
         //if (map.current) return; // initialize map only once
 
-        (map.current! as mapboxgl.Map) = new mapboxgl.Map({
-            container: mapContainer.current!,
-            style: 'mapbox://styles/mapbox/streets-v12',
-            center: [lng, lat],
-            zoom: zoom
-        });
+        if (!map.current) {
+            (map.current! as mapboxgl.Map) = new mapboxgl.Map({
+                container: mapContainer.current!,
+                style: 'mapbox://styles/mapbox/streets-v12',
+                center: [lng, lat],
+                zoom: zoom
+            });
+        }
+
+        mapMarkers.forEach((marker) => marker.remove());
+        mapMarkers = [];
 
         const fetchData = async () => {
             try {
@@ -47,11 +54,11 @@ const MapView = () => {
 
                 response.data.data.map((event: any) => {
                     //console.log(event.lng, event.lag);
-                    new mapboxgl.Marker()
+                    const marker = new mapboxgl.Marker()
                         .setLngLat([event.lng, event.lag])
                         .addTo(map.current!);
+                    mapMarkers.push(marker);
                 });
-                
 
                 setEventData(response.data.data);
                 //console.log(response.data.data);

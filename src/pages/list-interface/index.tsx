@@ -19,9 +19,7 @@ const ListView = () => {
 
         const fetchData = async () => {
             try {
-                var hostname = window.location.hostname;
-                var urlWithoutPort = `http://${hostname}`;
-                let url = urlWithoutPort + ":8080/event?";
+                let url = "https://whatnowmap.onrender.com/event?";
                 if (defaults.Categories.map((i:string)=>i.toLowerCase()).includes(category as any)) {
                     url += "category=" + category
                 }

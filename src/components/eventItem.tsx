@@ -7,7 +7,6 @@ import icon_thumb_up from "../assets/images/icon-thumb-up.svg"
 
 
 interface EvenItemProps {
-  id: string,
     title: string,
     image?: string,
     link?: string,

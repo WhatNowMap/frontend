@@ -6,7 +6,7 @@ import logo_facebook from '../../assets/images/logo-facebook.svg'
 import logo_twitter from '../../assets/images/logo-twitter.svg'
 import hero from '../../assets//images/hero.jpg'
 
-const baseUrl = process.env.BASEURL
+const baseUrl = import.meta.env.VITE_REACT_APP_BASEURL
 
 export default function LandingPage() {
   return (
@@ -46,7 +46,7 @@ export default function LandingPage() {
         </h2>
         <div className='flex gap-14'>
           <Link
-            to={`${baseUrl}/auth/google`}
+            to={`${baseUrl}auth/google`}
             className='h-12 w-12 rounded-full flex justify-center items-center bg-white cursor-pointer'>
             <img
               src={logo_google}
@@ -54,7 +54,7 @@ export default function LandingPage() {
             />
           </Link>
           <Link
-            to={`${baseUrl}/auth/facebook`}
+            to={`${baseUrl}auth/facebook`}
             className='h-12 w-12 rounded-full flex justify-center items-center bg-white'>
             <img
               src={logo_facebook}
@@ -62,7 +62,7 @@ export default function LandingPage() {
             />
           </Link>
           <Link
-            to={`${baseUrl}/auth/twitter`}
+            to={`${baseUrl}auth/twitter`}
             className='h-12 w-12 rounded-full flex justify-center items-center bg-white'>
             <img
               src={logo_twitter}

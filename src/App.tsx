@@ -13,7 +13,6 @@ import EventDetail from "./pages/event-detail";
 import MapView from "./pages/map-interface";
 import UserProfile from "./pages/user-profile";
 import NotFound from "./pages/not-found";
-import Bookmark from "./pages/bookmark";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,7 +28,6 @@ const router = createBrowserRouter(
       <Route path="/event/:event_id" element={<EventDetail />} />
       <Route path="/profile" element={<UserProfile />} />
       <Route path="*" element={<NotFound />} />
-      <Route path="*" element={<Bookmark />} />
     </Route>
   )
 );

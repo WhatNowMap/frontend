@@ -1,4 +1,3 @@
-
 import { TabPanel, useTabs } from "react-headless-tabs";
 import { TabSelector } from "./tabSelector";
 import Comments from "./comment";

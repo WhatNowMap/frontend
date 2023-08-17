@@ -19,7 +19,7 @@ const ListView = () => {
 
         const fetchData = async () => {
             try {
-                let url = "https://whatnowmap.onrender.com/event?";
+                let url = "https://whatnowmap-api.onrender.com/event?";
                 if (defaults.Categories.map((i:string)=>i.toLowerCase()).includes(category as any)) {
                     url += "category=" + category
                 }

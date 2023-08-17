@@ -1,4 +1,3 @@
-
 import TabBar from "../../components/tabBar";
 import EventDetails from "../../components/eventDetail";
 

@@ -18,8 +18,6 @@ interface EvenItemProps {
     bookmark: boolean,
 }
 
-
-
 const EventItem = (props: EvenItemProps) => {
     const timediff:number = (Date.now()-props.time)/1000;
     let timelapse:string = "";
@@ -34,7 +32,7 @@ const EventItem = (props: EvenItemProps) => {
         const hr = Math.floor(timediff/60/60);
         timelapse = hr == 1 ? "1 hr ago" : hr + " hrs ago";
     }
-    
+
     const content = (
         <>
             <div className="w-1/3 h-24 bg-secondary-500 me-2">
@@ -73,7 +71,7 @@ const EventItem = (props: EvenItemProps) => {
 
     return props.link 
         ? (
-            <Link to={props.link} className="w-full box-border flex flex-row px-4 py-4 bg-secondary-700">
+            <Link to={props.link}  className="w-full box-border flex flex-row px-4 py-4 bg-secondary-700">
                 {content}
             </Link>
         )

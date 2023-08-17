@@ -1,5 +1,12 @@
 import { Link } from 'react-router-dom'
 import EventItem from '../../components/eventItem'
+import logo_whatnow_name from '../../assets/images/logo-whatnow-name.svg'
+import logo_google from '../../assets/images/logo-google.svg'
+import logo_facebook from '../../assets/images/logo-facebook.svg'
+import logo_twitter from '../../assets/images/logo-twitter.svg'
+import hero from '../../assets/hero.jpg'
+
+const baseUrl = process.env.BASEURL
 
 export default function LandingPage() {
   return (
@@ -7,11 +14,11 @@ export default function LandingPage() {
       {/* Hero */}
       <div className='relative'>
         <img
-          src='/src/assets/images/hero.jpg'
+          src={hero}
           className='h-56 w-screen object-cover drop-shadow-2xl shadow-secondary-700 brightness-50'
         />
         <img
-          src='/src/assets/images/logo-whatnow-name.svg'
+          src={logo_whatnow_name}
           className='h-auto w-64 absolute bottom-1/2 translate-y-1/2 left-1/2 -translate-x-1/2'
         />
       </div>
@@ -39,26 +46,26 @@ export default function LandingPage() {
         </h2>
         <div className='flex gap-14'>
           <Link
-            to='http://localhost:8080/auth/google'
+            to={`${baseUrl}/auth/google`}
             className='h-12 w-12 rounded-full flex justify-center items-center bg-white cursor-pointer'>
             <img
-              src='/src/assets/images/logo-google.svg'
+              src={logo_google}
               className='h-3/5 w-auto'
             />
           </Link>
           <Link
-            to='/'
+            to={`${baseUrl}/auth/facebook`}
             className='h-12 w-12 rounded-full flex justify-center items-center bg-white'>
             <img
-              src='/src/assets/images/logo-facebook.svg'
+              src={logo_facebook}
               className='h-[75%] w-auto'
             />
           </Link>
           <Link
-            to='/'
+            to={`${baseUrl}/auth/twitter`}
             className='h-12 w-12 rounded-full flex justify-center items-center bg-white'>
             <img
-              src='/src/assets/images/logo-twitter.svg'
+              src={logo_twitter}
               className='h-[55%] w-auto mt-1 ml-0.5'
             />
           </Link>

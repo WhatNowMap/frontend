@@ -11,6 +11,7 @@ import RootLayout from './pages/root-layout';
 import ListView from './pages/list-interface';
 import EventDetail from './pages/event-detail';
 import Bookmark from './pages/bookmark';
+import Error from './pages/error';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,7 +21,7 @@ const router = createBrowserRouter(
       <Route path="/list" element={<ListView />} />
       <Route path="/event" element={<EventDetail />} />
       <Route path="/bookmark" element={<Bookmark />} />
-      
+      <Route path="/error" element={<Error />} />
     </Route>
   )
 )

@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import EventItem from "../../components/eventItem";
 import SearchBar from "../../components/searchBar";
 import TabBar from "../../components/tabBar";
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import axios from 'axios';
 import * as defaults from "../../utils/constants";
 import { isodate2Timestamp } from "../../utils/helper";

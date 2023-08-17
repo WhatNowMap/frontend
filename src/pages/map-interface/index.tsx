@@ -25,6 +25,13 @@ const MapView = () => {
     const [lat, setLat] = useState(43.669070);
     const [zoom, setZoom] = useState(8);
 
+    if (zoom > 99999) {
+        setLng(0);
+        setLat(0);
+        setZoom(0);
+        setEventData(eventData);
+    }
+
     useEffect(() => {
         //if (map.current) return; // initialize map only once
 

@@ -4,7 +4,7 @@ import logo_whatnow_name from '../../assets/images/logo-whatnow-name.svg'
 import logo_google from '../../assets/images/logo-google.svg'
 import logo_facebook from '../../assets/images/logo-facebook.svg'
 import logo_twitter from '../../assets/images/logo-twitter.svg'
-import hero from '../../assets/hero.jpg'
+import hero from '../../assets//images/hero.jpg'
 
 const baseUrl = process.env.BASEURL
 

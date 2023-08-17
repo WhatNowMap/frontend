@@ -20,7 +20,6 @@ export default function LandingPage() {
         {[...Array(10).keys()].map((i) => (
           <EventItem
             key={i}
-            id={i.toString()}
             title="Code 'Til You Drop Party"
             location='164 Eglinton Ave E, Toronto, ON M4P 1A6'
             category='Entertainment'

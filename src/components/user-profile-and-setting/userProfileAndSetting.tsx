@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const UserProfileAndSetting: React.FC = () => {
   const [userName, setUserName] = useState<string>(""); //get input value
@@ -16,11 +16,11 @@ const UserProfileAndSetting: React.FC = () => {
     setShowInput(true);
   };
 
+  const url = "https://whatnowmap.onrender.com";
+  const testingUserId = "64ddb3c7cee9262203b90d05";
   const fetchUserNameHandler = async (): Promise<void> => {
     try {
-      const response = await fetch(
-        "http://localhost:8080/user/profile/64d52a54e06e42dc494b7436"
-      );
+      const response = await fetch(`${url}/user/profile/`);
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
@@ -38,16 +38,13 @@ const UserProfileAndSetting: React.FC = () => {
 
   const updateUserName = async () => {
     try {
-      const response = await fetch(
-        "http://localhost:8080/user/update/64d52a54e06e42dc494b7436",
-        {
-          method: "PATCH",
-          body: JSON.stringify({ userName: userName }), // Use the variable without quotes
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${url}/user/update/${testingUserId}`, {
+        method: "PATCH",
+        body: JSON.stringify({ userName: userName }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (!response.ok) {
         throw new Error("Something went wrong!");

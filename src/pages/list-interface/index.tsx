@@ -25,7 +25,7 @@ const ListView = () => {
                 }
                 //console.log(url);
 
-                const response = await axios.get(url);
+                const response = await axios.get(url, { withCredentials: true });
                 setEventData(response.data.data);
             } catch (error) {
                 //console.log(error);

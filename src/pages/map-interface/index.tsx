@@ -54,7 +54,7 @@ const MapView = () => {
                     url += "category=" + category
                 }
 
-                const response = await axios.get(url);
+                const response = await axios.get(url, { withCredentials: true });
                 //console.log(url);
 
                 response.data.data.map((event: any) => {

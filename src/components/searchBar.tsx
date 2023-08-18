@@ -124,9 +124,9 @@ const SearchBar = (props: SearchBarProps) => {
                 </div>
             </div>
 
-            <div className="w-full p-1 bg-secondary-700 z-10">
-                <div className="flex flex-nowrap w-full overflow-x-scroll sm:overflow-x-auto no-scrollbar relative">
-                    <div className="w-2 sticky left-0 top-0 z-10 inline-block bg-gradient-to-r from-secondary-700 before:content-['.'] before:invisible flex-shrink-0"></div>
+            <div className="w-full py-2 z-10">
+                <div className="flex flex-nowrap w-full overflow-x-scroll sm:overflow-x-auto no-scrollbar relative px-2">
+                    {/* <div className="w-2 sticky left-0 top-0 z-10 inline-block bg-gradient-to-r from-secondary-700 before:content-['.'] before:invisible flex-shrink-0"></div> */}
                 {
                     defaults.Categories.map((category) => {
                         return (
@@ -138,7 +138,7 @@ const SearchBar = (props: SearchBarProps) => {
                                     value="1"
                                     onChange={handleCategoryChange}
                                     className="w-0 h-0 peer checked hidden" />
-                                <label htmlFor={category} className="flex flex-row items-center py-1 px-3 mx-1 text-sm font-bold rounded-full bg-white text-secondary-700 peer-checked:bg-primary-600 peer-checked:text-white">
+                                <label htmlFor={category} className="flex flex-row items-center py-1 px-3 mx-1 text-sm font-bold rounded-full bg-white/80 backdrop-blur-sm text-secondary-700 peer-checked:bg-primary-600 peer-checked:text-white">
                                     <Icon type={category.toLowerCase()} className="w-5 h-5 mr-1 text-inherit"/>
                                     {category}
                                 </label>
@@ -146,7 +146,7 @@ const SearchBar = (props: SearchBarProps) => {
                         )
                     })
                 }
-                    <div className="w-2 sticky right-0 top-0 z-10 inline-block bg-gradient-to-l from-secondary-700 before:content-['.'] before:invisible flex-shrink-0"></div>
+                    {/* <div className="w-2 sticky right-0 top-0 z-10 inline-block bg-gradient-to-l from-secondary-700 before:content-['.'] before:invisible flex-shrink-0"></div> */}
                 </div>
             </div>
         </form>

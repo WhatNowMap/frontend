@@ -1,13 +1,79 @@
+import { ChangeEvent, FormEvent, useRef, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import * as defaults from "../../utils/constants";
 import SearchBar from "../../components/searchBar";
 import TabBar from "../../components/tabBar";
-import { ChangeEvent, FormEvent, useState } from "react";
-import * as defaults from "../../utils/constants";
+import axios from 'axios';
+
+import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
+ 
+mapboxgl.accessToken =
+  'pk.eyJ1Ijoid2hhdG5vd21hcCIsImEiOiJjbGw0Nnk1aTkwMXIxM2VwMGpiN3RmZ3Y5In0.O5vq93APpSPPQgPHc9VC6g';
+
+let mapMarkers: mapboxgl.Marker[] = [];
 
 const MapView = () => {
     let {keyword, category} = useParams();
     const [formKeyword, setFormKeyword] = useState(keyword);
     const [formCategory, setFormCategory] = useState(category);
+    const [eventData, setEventData] = useState([]);
+
+    const mapContainer = useRef(null);
+    const map = useRef(null);
+    const [lng, setLng] = useState(-79.367015);
+    const [lat, setLat] = useState(43.669070);
+    const [zoom, setZoom] = useState(8);
+
+    if (zoom > 99999) {
+        setLng(0);
+        setLat(0);
+        setZoom(0);
+        setEventData(eventData);
+    }
+
+    useEffect(() => {
+        //if (map.current) return; // initialize map only once
+
+        if (!map.current) {
+            (map.current! as mapboxgl.Map) = new mapboxgl.Map({
+                container: mapContainer.current!,
+                style: 'mapbox://styles/mapbox/streets-v12',
+                center: [lng, lat],
+                zoom: zoom
+            });
+        }
+
+        mapMarkers.forEach((marker) => marker.remove());
+        mapMarkers = [];
+
+        const fetchData = async () => {
+            try {
+                let url = "https://whatnowmap-api.onrender.com/event?";
+                if (defaults.Categories.map((i:string)=>i.toLowerCase()).includes(category as any)) {
+                    url += "category=" + category
+                }
+
+                const response = await axios.get(url);
+                //console.log(url);
+
+                response.data.data.map((event: any) => {
+                    //console.log(event.lng, event.lag);
+                    const marker = new mapboxgl.Marker()
+                        .setLngLat([event.lng, event.lag])
+                        .addTo(map.current!);
+                    mapMarkers.push(marker);
+                });
+
+                setEventData(response.data.data);
+                //console.log(response.data.data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        fetchData();
+    }, [keyword, category]);
 
     const navigate = useNavigate();
 
@@ -48,13 +114,10 @@ const MapView = () => {
         <div className="flex flex-col h-[100dvh] max-h-[100dvh]">
             <SearchBar keyword={keyword} onSearch={handleSearch} onCategoryChange={handleCategoryChange} sort={false} />
             
-            <div className="flex-grow overflow-y-scroll no-scrollbar mt-[5.5rem] mb-12 z-10">
+            <div className="flex-grow overflow-y-scroll no-scrollbar mt-[3.25rem] mb-12 z-10">
+                <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
 
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11543.990214614816!2d-79.3916043!3d43.6690207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sca!4v1692111197447!5m2!1sen!2sca" 
-                className="w-full h-full border-0" 
-                loading="lazy"></iframe>
-
+                <div ref={mapContainer} className="map-container h-full w-full" />
             </div>
             <TabBar highlight="map"/>
         </div>

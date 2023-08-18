@@ -52,10 +52,11 @@ input[type='checkbox']{
     min-width: 100px;
     min-height: 45px;
     outline: none;
-    border: none;
+    border: 2px solid var(--color-purple-1);
     border-radius: 8px;
-    background-color: var(--color--white);
+    background-color: transparent;
     margin: 5px 0;
+    color: white;
 }
 
 .commentInput input{

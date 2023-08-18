@@ -1,5 +1,5 @@
 import moment from "moment";
-import { Component } from "react";
+import { Component, Ref } from "react";
 import style from "./Input.module.css";
 
 interface IProps {
@@ -9,6 +9,7 @@ interface IProps {
     callBack: (value: any, value2?: any) => void;
     styleType: string;
     id?: string;
+    name?: string;
     text?: any;
     checked?: boolean;
     min?: number;
@@ -19,6 +20,8 @@ interface IProps {
     disabled?: boolean;
     hidden?: boolean;
     accept?: string;
+    autocomplete?: string;
+    required?: boolean;
 }
 
 interface IState {
@@ -41,11 +44,10 @@ export default class Input extends Component<IProps, IState> {
     };
     hanldeOnChangeText = (event: any) => {
         this.resetState();
-        console.log(event);
-        console.log(event.target);
         if (event.target.value === "") {
             this.setState({ textLength: event.target.value.length });
         }
+
         switch (event.target.type) {
             case "text":
                 this.props.callBack(event.target.value);
@@ -86,6 +88,23 @@ export default class Input extends Component<IProps, IState> {
                     });
                 }
                 break;
+            case "datetime-local":
+                if (moment(event.target.value, "YYYY-MM-DDTHH:mm", true).isValid()) {
+                    this.setState({
+                        ...this.state,
+                        validData: { month: true },
+                        showError: false,
+                    });
+                    console.log(event.target.value);
+                    this.props.callBack(event.target.value);
+                } else {
+                    this.setState({
+                        ...this.state,
+                        validData: { month: false },
+                        showError: true,
+                    });
+                }
+                break;
         }
     };
 
@@ -106,6 +125,7 @@ export default class Input extends Component<IProps, IState> {
             >
                 <input
                     id={this.props.id}
+                    name={this.props.name}
                     type={this.props.type}
                     placeholder={this.props.placeholder !== "" || this.props.placeholder !== null ? this.props.placeholder : ""}
                     value={this.props.type === "number" ? (this.props.value === "" ? 0 : this.props.value) : this.props.value}
@@ -119,6 +139,8 @@ export default class Input extends Component<IProps, IState> {
                     disabled={this.props.disabled}
                     hidden={this.props.hidden}
                     accept={this.props.accept}
+                    autoComplete={this.props.autocomplete}
+                    required={this.props.required}
                 />
                 {this.props.text ? <>{this.props.text}</> : ""}
             </div>

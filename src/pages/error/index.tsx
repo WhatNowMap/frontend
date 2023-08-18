@@ -1,5 +1,7 @@
-
 import styled from 'styled-components';
+
+
+
 import logoerror from '../../assets/images/logo-error.svg';
 
   const $center = styled.div`
@@ -24,25 +26,23 @@ const $inlineblock =styled.div`
 display: inline-block;
 float: left;
 `;
-const NotFound = () => {
-  // return <div>404 not found</div>;
-  return(
 
-  <>
-  <Body className='bg-secondary-700'>
-  <$center>
-  <$inlineblock className=''>
-      4
-  </$inlineblock> 
- <$inlineblock><img className="h-20 w-20" src={logoerror} /></$inlineblock> 
-  <$inlineblock>
-      4
-  </$inlineblock>
-  </$center>
-  </Body>
-  <div>404 not found</div>;
-  </>
-   )
-};
+const error = () =>{
+    return(
+        <>
+        <Body className='bg-secondary-700'>
+        <$center>
+        <$inlineblock className=''>
+            4
+        </$inlineblock> 
+       <$inlineblock><img className="h-20 w-20" src={logoerror} /></$inlineblock> 
+        <$inlineblock>
+            4
+        </$inlineblock>
+        </$center>
 
-export default NotFound;
+        </Body>
+        </>
+    )
+}
+export default error

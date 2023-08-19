@@ -49,13 +49,6 @@ const MapView = () => {
 
         const fetchData = async () => {
             try {
-
-                const response2 = await axios.get("https://whatnowmap-api.onrender.com/auth/google/success");
-                console.log(response2);
-
-                const response3 = await axios.get("https://whatnowmap-api.onrender.com/auth/google/success", { withCredentials: true });
-                console.log(response3);
-
                 let url = "https://whatnowmap-api.onrender.com/event?";
                 if (defaults.Categories.map((i:string)=>i.toLowerCase()).includes(category as any)) {
                     url += "category=" + category

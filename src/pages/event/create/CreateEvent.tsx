@@ -25,8 +25,9 @@ const CreateEvent = () => {
     const [image, setImage] = useState<string | undefined>(undefined);
     const [imagefile, setImagefile] = useState<string | undefined>(undefined);
     const [selectedOption, setSelectedOption] = useState("");
-    const [latitude, setLatitude] = useState<number | null>(null);
-    const [longitude, setLongitude] = useState<number | null>(null);
+    const [latitude, setLatitude] = useState(0);
+    const [longitude, setLongitude] = useState(0);
+    const [locationName, setLocationName] = useState("");
     const selectedOptionRef = useRef();
 
     const options = PATH.Categories.map((category) => ({
@@ -40,6 +41,13 @@ const CreateEvent = () => {
     };
     const handleDescriptionChange = (event: any) => {
         setDescription(event.target.value);
+    };
+
+    const getLocation = (value: any) => {
+        console.log(value);
+        setLocationName(value.features[0].properties.name);
+        setLatitude(value.features[0].properties.coordinates.latitude);
+        setLongitude(value.features[0].properties.coordinates.longitude);
     };
 
     const getImg = (value: any) => {
@@ -59,20 +67,25 @@ const CreateEvent = () => {
             if (selectedOption == null || selectedOption == undefined || selectedOption == "") {
                 return;
             }
+            if (locationName == null || locationName == undefined || locationName == "") {
+                return;
+            }
             let mediaID;
             if (imagefile != null) {
                 mediaID = await uploadImg(imagefile);
             }
-            console.log(mediaID ? mediaID : "");
+
             let opts: CreateEventRequest = {
                 name: eventTitle,
                 category: selectedOption,
-                location: "",
-                lag: 0,
-                lng: 0,
+                location: locationName,
+                lag: latitude,
+                lng: longitude,
                 description: Description,
                 medialds: mediaID ? mediaID : "",
             };
+
+            console.log(opts);
 
             fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/event`, {
                 method: "POST",
@@ -119,7 +132,9 @@ const CreateEvent = () => {
         }
     };
 
-    const reset = (value: any) => {};
+    const reset = (value: any) => {
+        window.location.href = PATH.HOME_PATH;
+    };
 
     return (
         <div style={{ overflow: "auto", width: "100%", maxHeight: "100vh" }}>
@@ -153,24 +168,15 @@ const CreateEvent = () => {
                     <div>
                         <label>Location*</label>
                         <form>
-                            <Mapbox.AddressAutofill accessToken={PATH.accessToken}>
-                                <Input
-                                    id={"Input"}
-                                    type={"text"}
-                                    styleType={"Input"}
-                                    name="address"
-                                    autocomplete="street-address"
-                                    callBack={(value: any) => console.log(value)}
-                                ></Input>
-                            </Mapbox.AddressAutofill>
-
                             <Mapbox.SearchBox
                                 accessToken={PATH.accessToken}
                                 options={{
                                     language: "en",
                                     country: "CA",
                                 }}
-                                value={""}
+                                onChange={(val) => setLocationName(val)}
+                                onRetrieve={(val) => getLocation(val)}
+                                value=""
                             ></Mapbox.SearchBox>
                         </form>
                     </div>

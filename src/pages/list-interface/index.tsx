@@ -6,6 +6,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import axios from 'axios';
 import * as defaults from "../../utils/constants";
 import { isodate2Timestamp } from "../../utils/helper";
+const baseUrl = import.meta.env.VITE_REACT_APP_BASEURL
 
 const ListView = () => {
     let {keyword, category, sort} = useParams();
@@ -19,7 +20,7 @@ const ListView = () => {
 
         const fetchData = async () => {
             try {
-                let url = "https://whatnowmap-api.onrender.com/event?";
+                let url = `${baseUrl}event?`;
                 if (defaults.Categories.map((i:string)=>i.toLowerCase()).includes(category as any)) {
                     url += "category=" + category
                 }

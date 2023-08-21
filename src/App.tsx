@@ -28,6 +28,10 @@ const router = createBrowserRouter(
       <Route path="/event/:event_id" element={<EventDetail />} />
       <Route path="/profile" element={<UserProfile />} />
       <Route path="*" element={<NotFound />} />
+<<<<<<< HEAD
+      <Route path="/bookmark" element={<Bookmark />} />
+=======
+>>>>>>> 2791934040a8733624f5fb5c4a485e4393f31509
     </Route>
   )
 );

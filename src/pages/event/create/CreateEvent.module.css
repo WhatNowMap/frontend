@@ -78,6 +78,22 @@ textarea{
     padding: 10px !important;
 }
 
+
+mapbox-search-box > div{
+    width: 100%;
+    min-width: 100px;
+    outline: none;
+    border: 2px solid var(--color-purple-1) !important;
+    border-radius: 8px;
+    background-color: transparent !important;
+    margin: 5px 0;
+    color: white !important;
+}
+
+mapbox-search-box  input{
+    color: white !important;
+}
+
 @media screen and (max-width : 798px) {
     .Container{
         width:100%

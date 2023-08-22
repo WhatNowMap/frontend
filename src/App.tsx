@@ -9,6 +9,7 @@ import UserProfile from "./pages/user-profile";
 import NotFound from "./pages/not-found";
 import Bookmark from "./pages/bookmark";
 import CreateEvent from "./pages/event/create/CreateEvent";
+import ViewEventHistory from "./pages/user-profile/ViewEventHistory";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,14 +25,16 @@ const router = createBrowserRouter(
       <Route path="/event/:event_id" element={<EventDetail />} />
       <Route path="/profile" element={<UserProfile />} />
       <Route path="*" element={<NotFound />} />
-     <Route path="/event/create-event" element={<CreateEvent />} />
+      <Route path="/event/create-event" element={<CreateEvent />} />
+      <Route path='/eventHistory' element={<ViewEventHistory />}
+      />
     </Route>
   )
 
 );
 
 function App() {
-    return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />;
 }
 
 export default App;

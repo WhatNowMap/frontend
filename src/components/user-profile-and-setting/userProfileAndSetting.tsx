@@ -20,12 +20,12 @@ const UserProfileAndSetting: React.FC = () => {
   const testingUserId = "64ddb3c7cee9262203b90d05";
   const fetchUserNameHandler = async (): Promise<void> => {
     try {
-      const response = await fetch(`${url}/user/profile/`);
+      const response = await fetch(`${url}/user/profile`);
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
       const data = await response.json();
-      console.log(data.userName);
+      console.log(data);
       setUserName(data.userName);
     } catch (err) {
       console.log(err);

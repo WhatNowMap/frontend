@@ -3,6 +3,7 @@ import EventDetails from "../../components/eventDetail";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+const baseUrl = import.meta.env.VITE_REACT_APP_BASEURL
 
 interface EvenDetailsProps {
     attendance: number,
@@ -39,10 +40,9 @@ const EventDetail = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                var hostname = window.location.hostname;
-                var urlWithoutPort = `http://${hostname}`;
-                let url = urlWithoutPort + ":8080/event/" + eventID;
-                const response = await axios.get(url);
+                var urlWithoutPort = baseUrl
+                let url = urlWithoutPort + "event/" + eventID;
+                const response = await axios.get(url, { withCredentials: true });
                 setEventData(response.data.data);
                 console.log((eventData))
             } catch (error) {
@@ -51,7 +51,7 @@ const EventDetail = () => {
         }
         fetchData();
 
-    });
+    }, []);
 
 
     return(

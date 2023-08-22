@@ -19,7 +19,7 @@ const TabBar = (props: TabBarProps) => {
             <Link to="/list" className={"relative " + (props.highlight=="list" && "tab-highlight")}>
                 <img src={icon_list} className="w-6 h-6" />
             </Link>
-            <Link to="/create" className={"relative " + (props.highlight=="create" && "tab-highlight")}>
+            <Link to="/event/create-event" className={"relative " + (props.highlight=="create-event" && "tab-highlight")}>
                 <img src={icon_create} className="w-10 h-10" />
             </Link>
             <Link to="/bookmark" className={"relative " + (props.highlight=="bookmark" && "tab-highlight")}>

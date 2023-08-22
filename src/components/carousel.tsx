@@ -1,11 +1,11 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 
 const Carousels = () => {
+    
     return(
         <div>
         <Swiper pagination={true} modules={[Pagination]} className="mySwiper">

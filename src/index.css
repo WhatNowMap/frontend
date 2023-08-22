@@ -16,7 +16,7 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  @apply h-screen max-h-screen bg-primary-700  overflow-hidden;
+  @apply bg-primary-700  overflow-hidden;
 }
 
 #root {
@@ -49,93 +49,38 @@
   bottom: -8px;
 }
 
-/* Popup style */
-
-/* .popup-box {
-  position: fixed;
-  background: #00000050;
-  width: 100%;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  
-} */
-
 .report-submit {
   background-color: rgba(99, 59, 165, 1);
   border-radius: 5px;
   color: white;
-  padding: 5px;
-  margin: 10px;
+  padding: 10px;
+  margin-top: 15px;
   width: 30%;
 }
 
-/* .box {
-  position: relative;
-  width: 45%;
-  margin: 0 auto;
-  height: auto;
-  max-height: 90vh;
-  margin-top: calc(100vh - 85vh - 20px);
-  background: #fff;
-  border-radius: 4px;
-  padding: 20px;
-  /* border: 1px solid #999; */
-/* overflow: auto;
-  background: rgba(35, 37, 44, 1);
-  color: white;
-  text-align: center;
-} */
-
 .report-button {
   background-color: white;
-  border: 4px solid white;
   border-radius: 5px;
   color: black;
-  padding: 5px;
-  margin: 10px;
-  width: 50%;
-}
-
-.popup-box {
-  position: fixed;
-  background: #00000050;
-  width: 100%;
-  height: 100vh;
-  top: 0;
-  left: 0;
+  padding: 10px;
+  margin: 5px 10px;
+  width: 90%;
+  text-align: left;
 }
 
 .box {
   color: #fff;
   position: relative;
-  width: 70%;
+  width: 85%;
   margin: 0 auto;
   height: auto;
   max-height: 70vh;
-  margin-top: calc(100vh - 85vh - 20px);
+  margin-top: 20vh;
   background: #20252b;
-  border-radius: 4px;
-  padding: 20px;
-  border: 1px solid #20252b;
+  border-radius: 15px;
+  padding: 20px 10px;
   overflow: auto;
   text-align: center;
-}
-
-.close-icon {
-  content: "x";
-  cursor: pointer;
-  position: fixed;
-  right: calc(15% - 30px);
-  top: calc(100vh - 85vh - 33px);
-  background: #ededed;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  line-height: 20px;
-  text-align: center;
-  border: 1px solid #999;
-  font-size: 20px;
 }
 
 .swiper {
@@ -147,8 +92,6 @@
   text-align: center;
   font-size: 18px;
   background: #fff;
-
-  /* Center slide text vertically */
   display: flex;
   justify-content: center;
   align-items: center;

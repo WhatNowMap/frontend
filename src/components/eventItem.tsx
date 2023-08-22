@@ -15,10 +15,8 @@ interface EvenItemProps {
     likes: number,
     dislikes: number,
     time: number, 
-    bookmark: boolean
+    bookmark: boolean,
 }
-
-
 
 const EventItem = (props: EvenItemProps) => {
     const timediff:number = (Date.now()-props.time)/1000;
@@ -73,7 +71,7 @@ const EventItem = (props: EvenItemProps) => {
 
     return props.link 
         ? (
-            <Link to={props.link} className="w-full box-border flex flex-row px-4 py-4 bg-secondary-700">
+            <Link to={props.link}  className="w-full box-border flex flex-row px-4 py-4 bg-secondary-700">
                 {content}
             </Link>
         )

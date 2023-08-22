@@ -7,9 +7,12 @@ import axios from 'axios';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
- 
+const baseUrl = import.meta.env.VITE_REACT_APP_BASEURL
+
 mapboxgl.accessToken =
   'pk.eyJ1Ijoid2hhdG5vd21hcCIsImEiOiJjbGw0Nnk1aTkwMXIxM2VwMGpiN3RmZ3Y5In0.O5vq93APpSPPQgPHc9VC6g';
+
+let mapMarkers: mapboxgl.Marker[] = [];
 
 const MapView = () => {
     let {keyword, category} = useParams();
@@ -23,34 +26,45 @@ const MapView = () => {
     const [lat, setLat] = useState(43.669070);
     const [zoom, setZoom] = useState(8);
 
+    if (zoom > 99999) {
+        setLng(0);
+        setLat(0);
+        setZoom(0);
+        setEventData(eventData);
+    }
+
     useEffect(() => {
-        if (map.current) return; // initialize map only once
+        //if (map.current) return; // initialize map only once
 
-        (map.current! as mapboxgl.Map) = new mapboxgl.Map({
-            container: mapContainer.current!,
-            style: 'mapbox://styles/mapbox/streets-v12',
-            center: [lng, lat],
-            zoom: zoom
-        });
+        if (!map.current) {
+            (map.current! as mapboxgl.Map) = new mapboxgl.Map({
+                container: mapContainer.current!,
+                style: 'mapbox://styles/mapbox/streets-v12',
+                center: [lng, lat],
+                zoom: zoom
+            });
+        }
 
-        // const marker1 = new mapboxgl.Marker()
-        // .setLngLat([-79.3832, 43.6532])
-        // .addTo(map.current!);
+        mapMarkers.forEach((marker) => marker.remove());
+        mapMarkers = [];
 
         const fetchData = async () => {
             try {
-                var hostname = window.location.hostname;
-                var urlWithoutPort = `http://${hostname}`;
-                const url = urlWithoutPort + ":8080/event";
-                const response = await axios.get(url);
-                
+                let url = `${baseUrl}event?`;
+                if (defaults.Categories.map((i:string)=>i.toLowerCase()).includes(category as any)) {
+                    url += "category=" + category
+                }
+
+                const response = await axios.get(url, { withCredentials: true });
+                //console.log(url);
+
                 response.data.data.map((event: any) => {
-                    console.log(event.lng, event.lag);
-                    new mapboxgl.Marker()
+                    //console.log(event.lng, event.lag);
+                    const marker = new mapboxgl.Marker()
                         .setLngLat([event.lng, event.lag])
                         .addTo(map.current!);
+                    mapMarkers.push(marker);
                 });
-                
 
                 setEventData(response.data.data);
                 //console.log(response.data.data);
@@ -60,11 +74,7 @@ const MapView = () => {
         }
 
         fetchData();
-
-
-        // (map.current! as mapboxgl.Map).setCenter([-79.367015, 43.669070]);
-        // (map.current! as mapboxgl.Map).setZoom(11);
-    });
+    }, [keyword, category]);
 
     const navigate = useNavigate();
 

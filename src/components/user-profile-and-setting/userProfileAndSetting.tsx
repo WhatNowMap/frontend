@@ -1,26 +1,62 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const UserProfileAndSetting: React.FC = () => {
-  const [name, setName] = useState<string>("Name"); //would be fetch get from backend
-  const [inputValue, setInputValue] = useState<string>("Name"); //get input value
+  const [userName, setUserName] = useState<string>(""); //get input value
   const [showInput, setShowInput] = useState<boolean>(false); //edit name
 
   const getNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
-  const changeNameHandler = () => {
-    //would be post to backend
-    setName(inputValue);
-    setShowInput(!showInput);
+    setUserName(e.target.value);
   };
 
   const cancleHandler = () => {
-    setShowInput(!showInput);
+    setShowInput(false);
   };
 
   const editHandler = () => {
-    setShowInput(!showInput);
+    setShowInput(true);
+  };
+
+  const url = "https://whatnowmap.onrender.com";
+  const testingUserId = "64ddb3c7cee9262203b90d05";
+  const fetchUserNameHandler = async (): Promise<void> => {
+    try {
+      const response = await fetch(`${url}/user/profile`);
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+      const data = await response.json();
+      console.log(data);
+      setUserName(data.userName);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect((): void => {
+    fetchUserNameHandler();
+  }, [fetchUserNameHandler]);
+
+  const updateUserName = async () => {
+    try {
+      const response = await fetch(`${url}/user/update/${testingUserId}`, {
+        method: "PATCH",
+        body: JSON.stringify({ userName: userName }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      const data = await response.json();
+      console.log(data);
+
+      setShowInput(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const content = (
@@ -36,11 +72,11 @@ const UserProfileAndSetting: React.FC = () => {
               type="text"
               onChange={getNameHandler}
               className="bg-secondary-800 px-2 py-1 w-full focus:outline-none"
-              defaultValue={name}
+              defaultValue={userName}
             />
           </div>
         ) : (
-          <div className=" w-3/4 pl-2 pb-2 border-b ml-3">{name}</div>
+          <div className=" w-3/4 pl-2 pb-2 border-b ml-3">{userName}</div>
         )}
       </div>
 
@@ -58,7 +94,7 @@ const UserProfileAndSetting: React.FC = () => {
             </button>
             <button
               className=" ml-2 bg-primary-600  py-1 px-3 rounded-md"
-              onClick={changeNameHandler}
+              onClick={updateUserName}
             >
               Change
             </button>

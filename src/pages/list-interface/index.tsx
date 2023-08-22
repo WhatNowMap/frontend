@@ -6,6 +6,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import axios from "axios";
 import * as defaults from "../../utils/constants";
 import { isodate2Timestamp } from "../../utils/helper";
+const baseUrl = import.meta.env.VITE_REACT_APP_BASEURL;
 
 const ListView = () => {
   let { keyword, category, sort } = useParams();

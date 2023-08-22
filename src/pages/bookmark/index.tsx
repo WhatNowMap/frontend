@@ -35,7 +35,7 @@ const ListView = () => {
               
             
             </div>
-            <TabBar highlight="list"/>
+            <TabBar highlight="bookmark"/>
         </div>
     )
 

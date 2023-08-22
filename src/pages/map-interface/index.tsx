@@ -7,7 +7,8 @@ import axios from 'axios';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
- 
+const baseUrl = import.meta.env.VITE_REACT_APP_BASEURL
+
 mapboxgl.accessToken =
   'pk.eyJ1Ijoid2hhdG5vd21hcCIsImEiOiJjbGw0Nnk1aTkwMXIxM2VwMGpiN3RmZ3Y5In0.O5vq93APpSPPQgPHc9VC6g';
 
@@ -49,12 +50,12 @@ const MapView = () => {
 
         const fetchData = async () => {
             try {
-                let url = "https://whatnowmap-api.onrender.com/event?";
+                let url = `${baseUrl}event?`;
                 if (defaults.Categories.map((i:string)=>i.toLowerCase()).includes(category as any)) {
                     url += "category=" + category
                 }
 
-                const response = await axios.get(url);
+                const response = await axios.get(url, { withCredentials: true });
                 //console.log(url);
 
                 response.data.data.map((event: any) => {

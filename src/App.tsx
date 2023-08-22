@@ -1,10 +1,4 @@
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from "react-router-dom";
-
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
 
 import LandingPage from "./pages/landing-page";
 import RootLayout from "./pages/root-layout";
@@ -14,6 +8,8 @@ import MapView from "./pages/map-interface";
 import UserProfile from "./pages/user-profile";
 import NotFound from "./pages/not-found";
 import Bookmark from "./pages/bookmark";
+import CreateEvent from "./pages/event/create/CreateEvent";
+import ViewEventHistory from "./pages/user-profile/ViewEventHistory";
 
 import { useEffect } from "react";
 import { initializeCloudMessaging, receiveMessage, requestPermission, requestToken } from "./components/cloud-messaging/receive-message";
@@ -33,9 +29,12 @@ const router = createBrowserRouter(
       <Route path="/event/:event_id" element={<EventDetail />} />
       <Route path="/profile" element={<UserProfile />} />
       <Route path="*" element={<NotFound />} />
-      <Route path="/bookmark" element={<Bookmark />} />
+      <Route path="/event/create-event" element={<CreateEvent />} />
+      <Route path='/eventHistory' element={<ViewEventHistory />}
+      />
     </Route>
   )
+
 );
 
 function App() {

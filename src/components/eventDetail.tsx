@@ -53,7 +53,14 @@ const EventDetail = (props:EvenDetailsProps) => {
                         10 mins ago
                     </div>
                 </div>
-                <Tabs/>
+                <Tabs
+                    category={props.category}
+                    description={props.description}
+                    lag={props.lag}
+                    lng={props.lng}
+                    location={props.location}
+                    time={1}
+                />
             </div>
         </div>
     )

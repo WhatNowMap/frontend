@@ -15,6 +15,10 @@ import UserProfile from "./pages/user-profile";
 import NotFound from "./pages/not-found";
 import Bookmark from "./pages/bookmark";
 
+import { useEffect } from "react";
+import { initializeCloudMessaging, receiveMessage, requestPermission, requestToken } from "./components/cloud-messaging/receive-message";
+import { onMessage } from "firebase/messaging";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
@@ -35,6 +39,22 @@ const router = createBrowserRouter(
 );
 
 function App() {
+  const messaging = initializeCloudMessaging();
+  requestPermission();
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/firebase-messaging-sw.js', {
+      scope: '/'
+    }).then(function(registration) {
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }).catch(err => {
+      console.log("Failed to register a service worker", err);
+    });
+  }
+  useEffect(() => {
+    console.log("Receiving")
+    receiveMessage(messaging);
+  })
   return <RouterProvider router={router} />;
 }
 

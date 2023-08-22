@@ -43,8 +43,8 @@ const EventDetail = () => {
                 var urlWithoutPort = baseUrl
                 let url = urlWithoutPort + "event/" + eventID;
                 const response = await axios.get(url, { withCredentials: true });
+                console.log(response.data.data)
                 setEventData(response.data.data);
-                console.log((eventData))
             } catch (error) {
 
             }

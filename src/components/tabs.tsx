@@ -4,7 +4,16 @@ import Comments from "./comment";
 import Icon from "./icon";
 import { useState } from "react";
 
-const Tabs = () => {
+interface EvenDetailsProps {
+    category: string,
+    description: string,
+    lag: string,
+    lng: string,
+    location: string,
+    time: number,
+}
+
+const Tabs = (props:EvenDetailsProps) => {
     const [selectedTab, setSelectedTab] = useTabs(["details","comments",]);
     const [isOpen, setIsOpen] = useState(false);
     const togglePopup = () => {
@@ -56,16 +65,16 @@ const Tabs = () => {
                             <div className="grid grid-cols-2 mb-2 items-center">
                                 <div className="text-xl font-bold">About this event</div>
                                 <div className="justify-self-end">
-                                    Entertainment
+                                    {props.category}
                                 </div>
                             </div>
                             <div className="font-thin text-sm">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ...more
+                                {props.description}
                             </div>
                         </div>
                         <div className="text-xl font-semibold mt-4 mb-2">Location</div>
                         <div className="grid grid-cols-2 items-center text-xs">
-                            <div className="">777 Yonge Street, Toronto</div>
+                            <div className="">{props.location}</div>
                             <div className="justify-self-end flex items-center">
                             <Icon type={"car-fill"} className="w-5 h-5 mr-2 text-secondary-100 fill-current"/>
                                 10 mins

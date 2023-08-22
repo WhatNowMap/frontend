@@ -112,14 +112,13 @@ const Tabs = (props:EvenDetailsProps) => {
                     </div>
                     
                     <form className="flex">
-                        <img src="../src/assets/images/icon-profile.svg" className="bg-[#404040] px-3"/>
                         <input type="text" 
                             className="w-full py-4 px-3 text-secondary-400 bg-[#404040] rounded-none focus:outline-none" 
                             placeholder="Leave your thoughts here..."/>
-                        <button type="button" className="flex items-center px-3 bg-[#404040]">
+                        <button className="flex items-center px-3 bg-[#404040]">
                             <Icon type={"photo"} className="w-7 h-7 text-secondary-100 fill-current"/>
                         </button>
-                        <button type="button" className="flex items-center px-3 bg-[#404040]">
+                        <button type="submit" className="flex items-center px-3 bg-[#404040]">
                             <Icon type={"send"} className="w-7 h-7 text-secondary-100 fill-current"/>
                         </button>
                     </form>

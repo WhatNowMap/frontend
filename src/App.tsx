@@ -1,10 +1,4 @@
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from "react-router-dom";
-
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
 
 import LandingPage from "./pages/landing-page";
 import RootLayout from "./pages/root-layout";
@@ -14,6 +8,7 @@ import MapView from "./pages/map-interface";
 import UserProfile from "./pages/user-profile";
 import NotFound from "./pages/not-found";
 import Bookmark from "./pages/bookmark";
+import CreateEvent from "./pages/event/create/CreateEvent";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,14 +23,16 @@ const router = createBrowserRouter(
       <Route path="/list/:category/:sort/:keyword" element={<ListView />} />
       <Route path="/event/:event_id" element={<EventDetail />} />
       <Route path="/profile" element={<UserProfile />} />
-      <Route path="*" element={<NotFound />} />
       <Route path="/bookmark" element={<Bookmark />} />
+      <Route path="*" element={<NotFound />} />
+     <Route path="/event/CreateEvent" element={<CreateEvent />} />
     </Route>
   )
+
 );
 
 function App() {
-  return <RouterProvider router={router} />;
+    return <RouterProvider router={router} />;
 }
 
 export default App;

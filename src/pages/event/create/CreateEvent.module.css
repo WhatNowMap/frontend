@@ -1,0 +1,105 @@
+
+.Container{
+    width: 65%;
+    margin: 0 auto;
+   
+}
+
+.Container > div{
+    margin-bottom: 10px;
+}
+
+.ImgContainer{
+    padding: 20px;
+    width: 100%;
+    
+}
+
+.Imgbtn{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    top: 35px;
+}
+
+
+.img{
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+}
+
+.InputContainer{
+    width: 100%;
+    padding: 0  20px;
+
+}
+
+button[type='button']{
+    width: 6rem;
+    height: 3rem;
+    background-color: white;
+    border-radius: 8px;
+    margin: 0 10px;
+}
+
+.btnContainer{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px 0;
+}
+
+.InputContainer label{
+    color: white;
+    margin: 10px 0;
+}
+
+
+.selectField{
+    border: 2px solid var(--color-purple-1) !important;
+    border-radius: 8px !important;
+    background-color: transparent !important;
+    margin: 5px 0 !important;
+    color: white !important;
+}
+
+.selectField div{
+    color: white;
+}
+
+
+textarea{
+    border: 2px solid var(--color-purple-1) ;
+    border-radius: 8px ;
+    background-color: transparent ;
+    margin: 5px 0 ;
+    color: white !important;
+    outline:none;
+    padding: 10px !important;
+}
+
+
+mapbox-search-box > div{
+    width: 100%;
+    min-width: 100px;
+    outline: none;
+    border: 2px solid var(--color-purple-1) !important;
+    border-radius: 8px;
+    background-color: transparent !important;
+    margin: 5px 0;
+    color: white !important;
+}
+
+mapbox-search-box  input{
+    color: white !important;
+}
+
+@media screen and (max-width : 798px) {
+    .Container{
+        width:100%
+    }
+    .ImgContainer{
+        width: 100%;
+     
+    }
+}

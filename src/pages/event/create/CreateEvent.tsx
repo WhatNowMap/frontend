@@ -8,6 +8,7 @@ import Select from "react-select";
 import * as PATH from "../../../utils/constants";
 import * as Mapbox from "@mapbox/search-js-react";
 import axios from "axios";
+import Header from "../../../components/header";
 
 interface CreateEventRequest {
     name: string;
@@ -137,69 +138,72 @@ const CreateEvent = () => {
     };
 
     return (
-        <div style={{ overflow: "auto", width: "100%", maxHeight: "100vh" }}>
-            <div className={style.Container}>
-                <div className={style.ImgContainer}>
-                    <div className={style.Imgbtn}>
-                        <label htmlFor="file">
-                            <HiOutlinePhotograph size="30px" />
-                        </label>
-                        <Input id={"file"} type={"file"} styleType={"Input"} accept={"image/*"} callBack={(value: any) => getImg(value)}></Input>
+        <>
+            <Header Header_title={"Create Event"} arrow={true} />
+            <div style={{ overflow: "auto", width: "100%", height: "100vh", maxHeight: "calc(100vh - 60px)" }}>
+                <div className={style.Container}>
+                    <div className={style.ImgContainer}>
+                        <div className={style.Imgbtn}>
+                            <label htmlFor="file">
+                                <HiOutlinePhotograph size="30px" />
+                            </label>
+                            <Input id={"file"} type={"file"} styleType={"Input"} accept={"image/*"} callBack={(value: any) => getImg(value)}></Input>
+                        </div>
+                        {image == undefined ? <div style={{ backgroundColor: "white", aspectRatio: "16 / 9" }}></div> : <img className={style.img} src={image}></img>}
                     </div>
-                    {image == undefined ? <div style={{ backgroundColor: "white", aspectRatio: "16 / 9" }}></div> : <img className={style.img} src={image}></img>}
-                </div>
-                <div className={style.InputContainer}>
-                    <div>
-                        <label>Event Title*</label>
-                        <Input id={"Input"} type={"text"} styleType={"Input"} value={eventTitle} callBack={(value: any) => seteventTitle(value)} required={true}></Input>
-                    </div>
-                    <div>
-                        <label>Category*</label>
-                        <Select
-                            classNames={{
-                                control: () => style.selectField,
-                            }}
-                            onChange={handleCategoryChange}
-                            options={options}
-                            placeholder={""}
-                            ref={selectedOptionRef}
-                        />
-                    </div>
-                    <div>
-                        <label>Location*</label>
-                        <form>
-                            <Mapbox.SearchBox
-                                accessToken={PATH.accessToken}
-                                options={{
-                                    language: "en",
-                                    country: "CA",
+                    <div className={style.InputContainer}>
+                        <div>
+                            <label>Event Title*</label>
+                            <Input id={"Input"} type={"text"} styleType={"Input"} value={eventTitle} callBack={(value: any) => seteventTitle(value)} required={true}></Input>
+                        </div>
+                        <div>
+                            <label>Category*</label>
+                            <Select
+                                classNames={{
+                                    control: () => style.selectField,
                                 }}
-                                onChange={(val) => setLocationName(val)}
-                                onRetrieve={(val) => getLocation(val)}
-                                value=""
-                            ></Mapbox.SearchBox>
-                        </form>
-                    </div>
+                                onChange={handleCategoryChange}
+                                options={options}
+                                placeholder={""}
+                                ref={selectedOptionRef}
+                            />
+                        </div>
+                        <div>
+                            <label>Location*</label>
+                            <form>
+                                <Mapbox.SearchBox
+                                    accessToken={PATH.accessToken}
+                                    options={{
+                                        language: "en",
+                                        country: "CA",
+                                    }}
+                                    onChange={(val) => setLocationName(val)}
+                                    onRetrieve={(val) => getLocation(val)}
+                                    value=""
+                                ></Mapbox.SearchBox>
+                            </form>
+                        </div>
 
-                    {/* <div>
+                        {/* <div>
                         <label>Event Date*</label>
                         <Input id={"Input"} type={"datetime-local"} styleType={"Input"} value={date} callBack={(value: any) => setDate(value)}></Input>
                     </div> */}
-                    <div>
-                        <label>Description</label>
-                        <textarea style={{ width: "100%" }} id={"commentInput"} rows={5} cols={50} value={Description} onChange={handleDescriptionChange}></textarea>
+                        <div>
+                            <label>Description</label>
+                            <textarea style={{ width: "100%" }} id={"commentInput"} rows={5} cols={50} value={Description} onChange={handleDescriptionChange}></textarea>
+                        </div>
+                    </div>
+                    <div className={style.btnContainer}>
+                        <button type="button" onClick={submit}>
+                            Yes
+                        </button>
+                        <button type="button" onClick={reset}>
+                            No
+                        </button>
                     </div>
                 </div>
-                <div className={style.btnContainer}>
-                    <button type="button" onClick={submit}>
-                        Yes
-                    </button>
-                    <button type="button" onClick={reset}>
-                        No
-                    </button>
-                </div>
             </div>
-        </div>
+        </>
     );
 };
 

@@ -1,38 +1,27 @@
-
-import arrow from "../assets/images/icon-arrow.svg"
+import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 interface HeaderProps {
-    
-    Header_title: string,
-    link?: string,
-    arrow?: boolean
+    Header_title: string;
+    link?: string;
+    arrow?: boolean;
 }
-
 
 const header = (props: HeaderProps) => {
-
-
     return (
-        <div className="fixed top-0 w-full z-40">
-            <div className="w-full bg-primary-700 px-4 py-2">
-                <div className="relative">
-                {
-                    props.arrow &&
-                     <Link to="/list" className="absolute " >
-                    <img src={arrow} className="w-7 h-7 relative top-[10px]" />
+        <div className="static top-0 w-full z-40">
+            <div className="w-full bg-primary-700 px-4 py-2 flex items-center">
+                {props.arrow && (
+                    <Link to="/list">
+                        <MdOutlineArrowBackIosNew size={30} color={"white"} />
+                        {/* <img src={arrow} className="w-7 h-7 relative top-[10px]" /> */}
                     </Link>
-                    }
-    
+                )}
 
-                      <div className="block text-white px-14 p-2.5">
-                    {props.Header_title}
-                    </div>
-                </div>
-        
+                <div className="block text-white w-full text-center p-2.5">{props.Header_title}</div>
             </div>
         </div>
-    )
-}
- 
+    );
+};
+
 export default header;

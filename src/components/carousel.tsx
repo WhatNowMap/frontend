@@ -10,13 +10,13 @@ const Carousels = () => {
         <div>
         <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
             <SwiperSlide>
-                <img src="../assets/images/hero.jpg"/>
+                <img src="../../src/assets/images/hero.jpg"/>
             </SwiperSlide>
             <SwiperSlide>
-                <img src="../assets/images/hero.jpg"/>    
+                <img src="../../src/assets/images/hero.jpg"/>    
             </SwiperSlide>
             <SwiperSlide>
-                <img src="../assets/images/hero.jpg"/>
+                <img src="../../src/assets/images/hero.jpg"/>
             </SwiperSlide>
         </Swiper>
         </div>

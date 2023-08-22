@@ -23,7 +23,6 @@ const router = createBrowserRouter(
       <Route path="/list/:category/:sort/:keyword" element={<ListView />} />
       <Route path="/event/:event_id" element={<EventDetail />} />
       <Route path="/profile" element={<UserProfile />} />
-      <Route path="/bookmark" element={<Bookmark />} />
       <Route path="*" element={<NotFound />} />
      <Route path="/event/create-event" element={<CreateEvent />} />
     </Route>

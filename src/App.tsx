@@ -59,15 +59,8 @@ function App() {
             },
             body: JSON.stringify({token: currentToken, topic: "all_users"}),
           })
-          .then((response) => {
-                console.log(response);
-                if (response.ok) {
-                } else {
-                    // Handle error
-                }
-          })
           .catch((err) => {
-                console.log("err", err);
+              console.log("err", err);
           });
         } else {
           console.log('No registration token available. Request permission to generate one.');

@@ -19,7 +19,7 @@ const ListView = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let url = "https://whatnowmap-api.onrender.com/event?";
+        let url = `${baseUrl}event?`;
         if (
           defaults.Categories.map((i: string) => i.toLowerCase()).includes(
             category as any
@@ -29,10 +29,10 @@ const ListView = () => {
         }
         console.log(url);
 
-        const response = await axios.get("http://localhost:8080", {
+        const response = await axios.get(url, {
           withCredentials: true,
         });
-        console.log(response.data);
+        console.log('setEventData', response.data);
         setEventData(response.data.data);
       } catch (error) {
         //console.log(error);

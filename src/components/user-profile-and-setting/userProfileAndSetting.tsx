@@ -1,11 +1,21 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 
+type User = {
+  email: string,
+  userName: string,
+  tag: string[],
+  fixedLocation: string
+}
+
 const UserProfileAndSetting: React.FC = () => {
-  const [userName, setUserName] = useState<string>(""); //get input value
+  const [user, setUser] = useState<User>(); //get input value
   const [showInput, setShowInput] = useState<boolean>(false); //edit name
+  const baseUrl = import.meta.env.VITE_REACT_APP_BASEURL
 
   const getNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserName(e.target.value);
+    const updatedUser = {...user, userName:e.target.value }
+    setUser(updatedUser)
   };
 
   const cancleHandler = () => {
@@ -16,17 +26,19 @@ const UserProfileAndSetting: React.FC = () => {
     setShowInput(true);
   };
 
-  const url = "https://whatnowmap.onrender.com";
-  const testingUserId = "64ddb3c7cee9262203b90d05";
   const fetchUserNameHandler = async (): Promise<void> => {
     try {
-      const response = await fetch(`${url}/user/profile`);
-      if (!response.ok) {
-        throw new Error("Something went wrong!");
-      }
-      const data = await response.json();
-      console.log(data);
-      setUserName(data.userName);
+      await axios.get(`${baseUrl}user/profile`, {withCredentials: true})
+        .then(response=>{
+          const user = response.data
+          if(user){
+            setUser(user);
+          }else{
+            throw Error('User Not Found!')
+          }
+        }).catch(err=>{
+          console.log('fetchUserNameHandler::error', err)
+        })
     } catch (err) {
       console.log(err);
     }
@@ -34,25 +46,16 @@ const UserProfileAndSetting: React.FC = () => {
 
   useEffect((): void => {
     fetchUserNameHandler();
-  }, [fetchUserNameHandler]);
+  }, []);
 
   const updateUserName = async () => {
     try {
-      const response = await fetch(`${url}/user/update/${testingUserId}`, {
-        method: "PATCH",
-        body: JSON.stringify({ userName: userName }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Something went wrong!");
-      }
-
-      const data = await response.json();
-      console.log(data);
-
+      axios.post(`${baseUrl}user/update`, {...user}, {withCredentials: true})
+        .then(response=>{
+            console.log('updateUserName', response)
+        }).catch(err=>{
+          console.log(err)
+        })
       setShowInput(false);
     } catch (error) {
       console.error(error);
@@ -72,11 +75,11 @@ const UserProfileAndSetting: React.FC = () => {
               type="text"
               onChange={getNameHandler}
               className="bg-secondary-800 px-2 py-1 w-full focus:outline-none"
-              defaultValue={userName}
+              defaultValue={user && user.userName}
             />
           </div>
         ) : (
-          <div className=" w-3/4 pl-2 pb-2 border-b ml-3">{userName}</div>
+          <div className=" w-3/4 pl-2 pb-2 border-b ml-3">{user && user.userName}</div>
         )}
       </div>
 
@@ -104,7 +107,7 @@ const UserProfileAndSetting: React.FC = () => {
 
       <div className="mt-7 mb-2">Email ID</div>
       <div className="bg-secondary-800 px-3 py-2 rounded-md mb-6">
-        example@gmail.com
+        {user && user.email}
       </div>
       <div className="flex cursor-pointer justify-center  py-2 bg-primary-400 rounded-sm mb-4">
         <div>Event History</div>

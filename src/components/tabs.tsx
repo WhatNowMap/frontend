@@ -4,6 +4,7 @@ import Comments from "./comment";
 import Icon from "./icon";
 import { useState } from "react";
 
+
 interface EvenDetailsProps {
     category: string,
     description: string,
@@ -82,7 +83,7 @@ const Tabs = (props:EvenDetailsProps) => {
                         </div>
                     </div>
                     <div className="bg-primary-400 w-full h-60">
-                        {/* Map */}
+                        {props.lag}{props.lng}
                     </div>
                 </TabPanel>
                 <TabPanel hidden={selectedTab !== "comments"}>
@@ -95,20 +96,7 @@ const Tabs = (props:EvenDetailsProps) => {
                             time={123}
                             comment="Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
                         />
-                        <Comments
-                            username="User"
-                            profileImg="../src/assets/images/icon-profile.svg"
-                            likes={4}
-                            time={123}
-                            comment="Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
-                        />
-                        <Comments
-                            username="User"
-                            profileImg="../src/assets/images/icon-profile.svg"
-                            likes={4}
-                            time={123}
-                            comment="Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
-                        />
+
                     </div>
                     
                     <form className="flex">
@@ -129,4 +117,3 @@ const Tabs = (props:EvenDetailsProps) => {
 }
 
 export default Tabs;
-                

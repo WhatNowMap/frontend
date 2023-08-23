@@ -15,6 +15,7 @@ interface EvenDetailsProps {
     time: number,
 }
 
+
 const EventDetail = (props:EvenDetailsProps) => {
 
     return(

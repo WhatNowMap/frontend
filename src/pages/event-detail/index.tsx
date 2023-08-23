@@ -13,14 +13,21 @@ interface EvenDetailsProps {
     lng: string,
     location: string,
     name: string,
-    ranking: any,
+    like: number,
+    dislike: number,
     time: number,
+}
+
+interface RankingProps {
+    like: number,
+    dislike: number
 }
 
 
 const EventDetail = () => {
     const urlID = useParams();
     const eventID = urlID.event_id
+    const [eventRanking, setEventRanking] = useState<RankingProps>({like: 0, dislike: 0})
     const [eventData, setEventData] = useState<EvenDetailsProps>({
         attendance: 0,
         category: "",
@@ -29,7 +36,8 @@ const EventDetail = () => {
         lng: "",
         location: "",
         name: "",
-        ranking: {},
+        like: 0,
+        dislike: 0,
         time: 0,
     });
 
@@ -39,14 +47,13 @@ const EventDetail = () => {
                 var urlWithoutPort = baseUrl
                 let url = urlWithoutPort + "event/" + eventID;
                 const response = await axios.get(url, { withCredentials: true });
-                console.log(response.data.data)
+                setEventRanking((response.data.data).ranking);
                 setEventData(response.data.data);
             } catch (error) {
 
             }
         }
         fetchData();
-
     }, []);
 
 
@@ -61,8 +68,8 @@ const EventDetail = () => {
                     lng={eventData.lng}
                     location={eventData.location}
                     name={eventData.name}
-                    like={eventData.like}
-                    dislike={eventData.dislike}
+                    like={eventRanking.like}
+                    dislike={eventRanking.dislike}
                     time={1}
                 />
             </div>

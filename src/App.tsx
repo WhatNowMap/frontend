@@ -12,8 +12,8 @@ import CreateEvent from "./pages/event/create/CreateEvent";
 import ViewEventHistory from "./pages/user-profile/ViewEventHistory";
 
 import { useEffect } from "react";
-import { initializeCloudMessaging, receiveMessage, requestPermission, requestToken } from "./components/cloud-messaging/receive-message";
-import { onMessage } from "firebase/messaging";
+import { initializeCloudMessaging, receiveMessage, requestPermission } from "./components/cloud-messaging/receive-message";
+import { getToken, onMessage } from "firebase/messaging";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -46,6 +46,28 @@ function App() {
       scope: '/'
     }).then(function(registration) {
       console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      getToken(messaging, { vapidKey: 'BBNCXrmhtZTUNHNSFnN9BlSmRtKjaszNJOTXVJNlOC1DudMIMBetilg-HJl3xkSNC7Imt8-2L8PoqLLGRUOOl6E' }).then((currentToken) => {
+        if (currentToken) {
+          console.log(currentToken);
+          onMessage(messaging, (payload) => {
+            console.log("Message received. ", payload);
+          });
+          fetch(`${import.meta.env.VITE_REACT_APP_BASEURL}notify/subscribe`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({token: currentToken, topic: "all_users"}),
+          })
+          .catch((err) => {
+              console.log("err", err);
+          });
+        } else {
+          console.log('No registration token available. Request permission to generate one.');
+        }
+      }).catch((err) => {
+        console.log('An error occurred while retrieving token. ', err);
+      });
     }).catch(err => {
       console.log("Failed to register a service worker", err);
     });

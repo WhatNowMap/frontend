@@ -13,7 +13,7 @@ import ViewEventHistory from "./pages/user-profile/ViewEventHistory";
 
 import { useEffect } from "react";
 import { initializeCloudMessaging, receiveMessage, requestPermission, requestToken } from "./components/cloud-messaging/receive-message";
-import { onMessage } from "firebase/messaging";
+import { getToken, onMessage } from "firebase/messaging";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -46,6 +46,24 @@ function App() {
       scope: '/'
     }).then(function(registration) {
       console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      getToken(messaging, { vapidKey: 'BBNCXrmhtZTUNHNSFnN9BlSmRtKjaszNJOTXVJNlOC1DudMIMBetilg-HJl3xkSNC7Imt8-2L8PoqLLGRUOOl6E' }).then((currentToken) => {
+        if (currentToken) {
+          // Send the token to your server and update the UI if necessary
+          // ...
+          console.log(currentToken);
+          onMessage(messaging, (payload) => {
+            console.log("Message received. ", payload);
+          });
+          
+        } else {
+          // Show permission request UI
+          console.log('No registration token available. Request permission to generate one.');
+          // ...
+        }
+      }).catch((err) => {
+        console.log('An error occurred while retrieving token. ', err);
+        // ...
+      });
     }).catch(err => {
       console.log("Failed to register a service worker", err);
     });

@@ -1,6 +1,3 @@
-// import { initializeApp } from "firebase/app";
-// import { getMessaging } from "firebase/messaging";
-
 importScripts("https://www.gstatic.com/firebasejs/10.2.0/firebase-app-compat.js");
 importScripts(
   "https://www.gstatic.com/firebasejs/10.2.0/firebase-messaging-compat.js"
@@ -19,24 +16,24 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
-
-// const app = initializeApp(firebaseConfig);
-// const messaging = getMessaging(app);
-
-// messaging.usePublicVapidKey(
-//   "BNLtDoKnBVaG4s8GlTWZxJOxJ7xp28UVx2dZYd8iLUm0a1oWQN7S7Dp_gEhCzOhKqaSwbNlhujLQAu1co7yjvJU"
-// );
-
 const isSupported = firebase.messaging.isSupported();
 
 if (isSupported) {
-    const messaging = firebase.messaging();
-    messaging.onBackgroundMessage(({ notification: { title, body, image } }) => {
-        self.registration.showNotification(title, { body, icon: image || '/assets/icons/icon-72x72.png' });
-    });
+  messaging.onBackgroundMessage(function (payload) {
+    const notificationTitle = payload.data.title;
+    const notificationOptions = {
+      body: payload.data.message,
+      icon: "",
+      data: { url: payload.data.onClick }, //the url which we gonna use later
+    };
+    return self.registration.showNotification(
+      notificationTitle,
+      notificationOptions
+    );
+  });  
 }
 
-messaging.onBackgroundMessage(function (payload) {
+messaging.onMessage(function (payload) {
   const notificationTitle = payload.data.title;
   const notificationOptions = {
     body: payload.data.message,
@@ -46,8 +43,8 @@ messaging.onBackgroundMessage(function (payload) {
   return self.registration.showNotification(
     notificationTitle,
     notificationOptions
-  );
-});
+  );}
+)
 
 //Code for adding event on click of notification
 self.addEventListener("notificationclick", function (event) {
@@ -69,4 +66,31 @@ self.addEventListener("notificationclick", function (event) {
       }
     })
   );
+});
+
+self.addEventListener('pushsubscriptionchange', async (event) => {
+  const subscription = await self.registration.pushManager.getSubscription();
+  if (subscription) {
+    const token = await subscription.getToken();
+    // You can use the token to send notifications to this specific device
+    console.log('FCM Registration Token:', token);
+    // You might want to send this token to your server for future use
+  } else {
+    console.log('Subscription has been unsubscribed.');
+  }
+});
+
+messaging.onBackgroundMessage((payload) => {
+  console.log(
+    '[firebase-messaging-sw.js] Received background message ',
+    payload
+  );
+  // Customize notification here
+  const notificationTitle = 'Background Message Title';
+  const notificationOptions = {
+    body: 'Background Message body.',
+    icon: '/firebase-logo.png'
+  };
+
+  self.registration.showNotification(notificationTitle, notificationOptions);
 });

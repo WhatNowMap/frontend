@@ -9,6 +9,7 @@ import * as PATH from "../../../utils/constants";
 import * as Mapbox from "@mapbox/search-js-react";
 import axios from "axios";
 import Header from "../../../components/header";
+import { onEnterRoute } from "../../../helpers/AuthHelper";
 
 interface CreateEventRequest {
     name: string;
@@ -20,6 +21,7 @@ interface CreateEventRequest {
     medialds: string;
 }
 const CreateEvent = () => {
+    onEnterRoute();
     const [date, setDate] = useState();
     const [eventTitle, seteventTitle] = useState<string | null>("");
     const [Description, setDescription] = useState("");

@@ -3,6 +3,7 @@ import EventDetails from "../../components/eventDetail";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { onEnterRoute } from "../../helpers/AuthHelper";
 const baseUrl = import.meta.env.VITE_REACT_APP_BASEURL
 
 interface EvenDetailsProps {
@@ -25,6 +26,7 @@ interface RankingProps {
 
 
 const EventDetail = () => {
+    onEnterRoute();
     const urlID = useParams();
     const eventID = urlID.event_id
     const [eventRanking, setEventRanking] = useState<RankingProps>({like: 0, dislike: 0})

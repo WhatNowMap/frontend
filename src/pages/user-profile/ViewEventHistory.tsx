@@ -6,8 +6,10 @@ import logo_google from '../../assets/images/logo-google.svg'
 import logo_facebook from '../../assets/images/logo-facebook.svg'
 import logo_twitter from '../../assets/images/logo-twitter.svg'
 import hero from '../../assets//images/hero.jpg'
+import { onEnterRoute } from "../../helpers/AuthHelper";
 
 const ViewEventHistory: React.FC = () => {
+    onEnterRoute();
     const { events } = useEventHistory();
 
     console.log(events)

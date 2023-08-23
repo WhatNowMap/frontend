@@ -1,4 +1,4 @@
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, useLocation, useNavigate } from "react-router-dom";
 
 import LandingPage from "./pages/landing-page";
 import RootLayout from "./pages/root-layout";
@@ -11,9 +11,10 @@ import Bookmark from "./pages/bookmark";
 import CreateEvent from "./pages/event/create/CreateEvent";
 import ViewEventHistory from "./pages/user-profile/ViewEventHistory";
 
-import { useEffect } from "react";
-import { initializeCloudMessaging, receiveMessage, requestPermission } from "./components/cloud-messaging/receive-message";
-import { getToken, onMessage } from "firebase/messaging";
+import { createContext, useEffect, useState } from "react";
+import { initializeCloudMessaging, receiveMessage, requestPermission, requestToken } from "./components/cloud-messaging/receive-message";
+import { onMessage } from "firebase/messaging";
+import axios from "axios";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,10 +38,22 @@ const router = createBrowserRouter(
 
 );
 
+type user = {
+  email: string,
+  provider: string,
+  tag: string[],
+  thirdPartyId: string,
+  userName: string,
+  _id: string
+}
+export const LoggedInContext = createContext<string>('');
 function App() {
+  const baseUrl = import.meta.env.VITE_REACT_APP_BASEURL
+  const [loggedInStatus, setLoggedInStatus] = useState("NOT_LOGGED_IN")
+  const [user, setUser] = useState<user|{}>({})
+  const [checked, setChecked] = useState(false)
   const messaging = initializeCloudMessaging();
   requestPermission();
-
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/firebase-messaging-sw.js', {
       scope: '/'
@@ -76,7 +89,35 @@ function App() {
     console.log("Receiving")
     receiveMessage(messaging);
   })
-  return <RouterProvider router={router} />;
+  const checkLoginStatus = async ()=> {
+    await axios.get(`${baseUrl}auth/logged_in`, {withCredentials: true})
+      .then(response => {
+        if(response.data.loggedIn && loggedInStatus==='NOT_LOGGED_IN'){
+          setLoggedInStatus('LOGGED_IN')
+          setUser(response.data.user)
+        }else if(!response.data.loggedIn && loggedInStatus==='LOGGED_IN'){
+          setLoggedInStatus('NOT_LOGGED_IN')
+          setUser({})
+        }
+        setChecked(true)
+      }).catch(err=>{
+        console.log(err)
+        setChecked(true)
+      })
+  }
+  useEffect(() => {
+    checkLoginStatus()
+  }, [])
+  return (
+    <>
+      { 
+        checked && 
+        <LoggedInContext.Provider value={loggedInStatus}>
+          <RouterProvider router={router} />
+        </LoggedInContext.Provider>
+      }
+    </>
+  );
 }
 
 export default App;

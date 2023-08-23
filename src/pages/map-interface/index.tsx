@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
+import { onEnterRoute } from "../../helpers/AuthHelper";
 const baseUrl = import.meta.env.VITE_REACT_APP_BASEURL
 
 mapboxgl.accessToken =
@@ -15,6 +16,7 @@ mapboxgl.accessToken =
 let mapMarkers: mapboxgl.Marker[] = [];
 
 const MapView = () => {
+    onEnterRoute();
     let {keyword, category} = useParams();
     const [formKeyword, setFormKeyword] = useState(keyword);
     const [formCategory, setFormCategory] = useState(category);

@@ -1,5 +1,5 @@
 import moment from "moment";
-import { Component, Ref } from "react";
+import { Component } from "react";
 import style from "./Input.module.css";
 
 interface IProps {

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, FocusEvent } from "react";
+import { useState, useRef } from "react";
 import Input from "../../../components/Input/Input";
 import { HiOutlinePhotograph } from "react-icons/hi";
 
@@ -7,7 +7,6 @@ import Select from "react-select";
 
 import * as PATH from "../../../utils/constants";
 import * as Mapbox from "@mapbox/search-js-react";
-import axios from "axios";
 import Header from "../../../components/header";
 
 interface CreateEventRequest {
@@ -158,7 +157,7 @@ const CreateEvent = () => {
                         </div>
                         <div>
                             <label>Category*</label>
-                            <Select
+                            {/* <Select
                                 classNames={{
                                     control: () => style.selectField,
                                 }}
@@ -166,12 +165,12 @@ const CreateEvent = () => {
                                 options={options}
                                 placeholder={""}
                                 ref={selectedOptionRef}
-                            />
+                            /> */}
                         </div>
                         <div>
                             <label>Location*</label>
                             <form>
-                                <Mapbox.SearchBox
+                                {/* <Mapbox.SearchBox
                                     accessToken={PATH.accessToken}
                                     options={{
                                         language: "en",
@@ -180,7 +179,7 @@ const CreateEvent = () => {
                                     onChange={(val) => setLocationName(val)}
                                     onRetrieve={(val) => getLocation(val)}
                                     value=""
-                                ></Mapbox.SearchBox>
+                                ></Mapbox.SearchBox> */}
                             </form>
                         </div>
 

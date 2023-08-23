@@ -15,6 +15,8 @@ interface EvenDetailsProps {
     name: string,
     ranking: any,
     time: number,
+    like: number,
+    dislike: number
 }
 
 
@@ -31,6 +33,8 @@ const EventDetail = () => {
         name: "",
         ranking: {},
         time: 0,
+        like: 0,
+        dislike: 0
     });
 
     useEffect(() => {

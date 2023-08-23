@@ -7,7 +7,6 @@ import EventDetail from "./pages/event-detail";
 import MapView from "./pages/map-interface";
 import UserProfile from "./pages/user-profile";
 import NotFound from "./pages/not-found";
-import Bookmark from "./pages/bookmark";
 import CreateEvent from "./pages/event/create/CreateEvent";
 import ViewEventHistory from "./pages/user-profile/ViewEventHistory";
 
@@ -42,7 +41,7 @@ function App() {
   requestPermission();
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/firebase-messaging-sw.js', {
+    navigator.serviceWorker.register('/firebase-messaging-sw', {
       scope: '/'
     }).then(function(registration) {
       console.log('ServiceWorker registration successful with scope: ', registration.scope);

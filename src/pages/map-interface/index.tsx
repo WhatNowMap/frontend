@@ -77,10 +77,9 @@ const MapView = () => {
                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Toronto_Skyline_Summer_2020.jpg/320px-Toronto_Skyline_Summer_2020.jpg"
                                     class="w-full h-24 object-cover" />
                             </div>
-                            <h3 class="mt-2 text-secondary-100 text-lg font-bold">${event["name"]}</h3>
+                            <div class="mt-2 mb-0 text-xs text-secondary-300">${event["category"]}</div>
+                            <div class="mt-0 mb-1 text-lg text-secondary-100 font-bold">${event["name"]}</div>
 
-
-                            <div class="text-xs text-secondary-300">${event["category"]}</div>
                             <div class="text-[8pt] text-secondary-300">
                                 <img class="h-4 mt-1 float-left me-1"  src="/images/icon-location-logo.svg" />
                                 ${event["location"]}

@@ -108,3 +108,31 @@
 .swiper-pagination-bullet {
   background: #e2e2e2;
 }
+
+.map-popup .mapboxgl-popup-content {
+  @apply bg-secondary-700
+}
+
+.map-popup.mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-tip,
+.map-popup.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
+.map-popup.mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip
+{
+  @apply border-t-secondary-700
+}
+
+.map-popup.mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip,
+.map-popup.mapboxgl-popup-anchor-top .mapboxgl-popup-tip,
+.map-popup.mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip
+{
+  @apply border-b-secondary-700
+}
+
+.map-popup.mapboxgl-popup-anchor-right .mapboxgl-popup-tip
+{
+  @apply border-l-secondary-700
+}
+
+.map-popup.mapboxgl-popup-anchor-left .mapboxgl-popup-tip
+{
+  @apply border-r-secondary-700
+}

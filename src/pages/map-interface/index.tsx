@@ -60,10 +60,63 @@ const MapView = () => {
                 const response = await axios.get(url, { withCredentials: true });
                 //console.log(url);
 
+
                 response.data.data.map((event: any) => {
+                    const popupContent = `
+                        <div class="flex flex-col">
+                            <div class="h-24 bg-secondary-500">
+                                <img 
+                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Toronto_Skyline_Summer_2020.jpg/320px-Toronto_Skyline_Summer_2020.jpg"
+                                    class="w-full h-24 object-cover" />
+                            </div>
+                            <h3 class="mt-2 text-secondary-100 text-lg font-bold">${event["name"]}</h3>
+
+
+                            <div class="text-xs text-secondary-300">${event["category"]}</div>
+                            <div class="text-[8pt] text-secondary-300">
+                                <img class="h-4 mt-1 float-left me-1"  src="/images/icon-location-logo.svg" />
+                                ${event["location"]}
+                            </div>
+                            <div class="w-full h-full flex flex-row grow items-end">
+                                <div class="flex flex-row items-center me-4">
+                                    <img class="h-3 w-3" src="/images/icon-thumb-up.svg" />
+                                    <div class="text-xs ms-1 text-secondary-200">${(event["ranking"])["like"]}</div>
+                                </div>
+                                <div class="flex flex-row items-center me-4">
+                                    <img class="h-3 w-3" src="/images/icon-thumb-down.svg" />
+                                    <div class="text-xs ms-1 text-secondary-200">${(event["ranking"])["dislike"]}</div>
+                                </div>
+                                <div class="text-end text-sm grow text-secondary-200">
+                                    
+                                </div>
+                            </div>
+
+                            <a href="/event/${event["_id"]}" class="bg-primary-500 hover:bg-primary-700 text-white font-bold mt-2 py-2 px-4 rounded inline-flex items-center outline-none">
+                                <svg class="fill-current w-4 h-4 mr-2"  viewBox="0 0 128 128" id="Layer_1" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g>
+                                    <path d="M109,55c0-29.8-24.2-54-54-54C25.2,1,1,25.2,1,55s24.2,54,54,54c13.5,0,25.8-5,35.2-13.1l25.4,25.4l5.7-5.7L95.9,90.2   C104,80.8,109,68.5,109,55z M55,101C29.6,101,9,80.4,9,55S29.6,9,55,9s46,20.6,46,46S80.4,101,55,101z"/>
+                                    <path d="M25.6,30.9l6.2,5.1C37.5,29,46,25,55,25v-8C43.6,17,32.9,22.1,25.6,30.9z"/>
+                                    <path d="M17,55h8c0-2.1,0.2-4.1,0.6-6.1l-7.8-1.6C17.3,49.8,17,52.4,17,55z"/>
+                                    </g>
+                                </svg>
+                                <span>Event Details</span>
+                            </a>
+
+                            
+                        </div>
+                    `;
+
                     //console.log(event.lng, event.lag);
-                    const marker = new mapboxgl.Marker()
+                    const marker = new mapboxgl.Marker({color: "#7958B0"})
                         .setLngLat([event.lng, event.lag])
+                        .setPopup(
+                            new mapboxgl.Popup({ 
+                                    className: "map-popup",
+                                    offset: 25,
+                                    closeButton: false
+                                    }) // add popups
+                                .setHTML(popupContent)
+                          )
                         .addTo(map.current!);
                     mapMarkers.push(marker);
                 });

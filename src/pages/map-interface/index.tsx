@@ -43,7 +43,8 @@ const MapView = () => {
                 container: mapContainer.current!,
                 style: 'mapbox://styles/mapbox/streets-v12',
                 center: [lng, lat],
-                zoom: zoom
+                zoom: zoom,
+                attributionControl: false
             });
         }
 

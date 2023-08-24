@@ -8,6 +8,7 @@ import axios from 'axios';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 import { onEnterRoute } from "../../helpers/AuthHelper";
+import { timestamp2Elapsed, isodate2Timestamp } from "../../utils/helper";
 const baseUrl = import.meta.env.VITE_REACT_APP_BASEURL
 
 mapboxgl.accessToken =
@@ -63,12 +64,12 @@ const MapView = () => {
                 if (defaults.Categories.map((i:string)=>i.toLowerCase()).includes(category as any)) {
                     myUrlWithParams.searchParams.append("category", category!);
                 }
-                console.log("Hello: " + myUrlWithParams.href);
+                //console.log("Hello: " + myUrlWithParams.href);
                 const response = await axios.get(myUrlWithParams.href, { withCredentials: true });
-                //console.log(url);
-
 
                 response.data.data.map((event: any) => {
+                    const elapsedTime = timestamp2Elapsed(isodate2Timestamp(event["createdAt"]));
+
                     const popupContent = `
                         <div class="flex flex-col">
                             <div class="h-24 bg-secondary-500">
@@ -94,7 +95,7 @@ const MapView = () => {
                                     <div class="text-xs ms-1 text-secondary-200">${(event["ranking"])["dislike"]}</div>
                                 </div>
                                 <div class="text-end text-sm grow text-secondary-200">
-                                    
+                                    ${elapsedTime}
                                 </div>
                             </div>
 

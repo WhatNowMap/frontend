@@ -177,7 +177,7 @@ const MapView = () => {
         <div className="flex flex-col h-[100dvh] max-h-[100dvh]">
             <SearchBar keyword={keyword} onSearch={handleSearch} onCategoryChange={handleCategoryChange} sort={false} />
             
-            <div className="flex-grow overflow-y-scroll no-scrollbar mt-[3rem] mb-12 z-10">
+            <div className="flex-grow overflow-y-scroll no-scrollbar mt-[2.75rem] mb-12 z-10">
                 <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
 
                 <div ref={mapContainer} className="map-container h-full w-full" />

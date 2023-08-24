@@ -54,18 +54,15 @@ const MapView = () => {
 
         const fetchData = async () => {
             try {
-
                 const myUrlWithParams = new URL(baseUrl + "event");
-
                 if (typeof keyword !== "undefined" && keyword.length > 0) {
                     myUrlWithParams.searchParams.append("keyword", keyword!);
                 }
-
                 if (defaults.Categories.map((i:string)=>i.toLowerCase()).includes(category as any)) {
                     myUrlWithParams.searchParams.append("category", category!);
                 }
-                //console.log("Hello: " + myUrlWithParams.href);
                 const response = await axios.get(myUrlWithParams.href, { withCredentials: true });
+                //console.log("Hello: " + myUrlWithParams.href);
 
                 response.data.data.map((event: any) => {
                     const elapsedTime = timestamp2Elapsed(isodate2Timestamp(event["createdAt"]));

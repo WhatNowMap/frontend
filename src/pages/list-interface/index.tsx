@@ -22,14 +22,23 @@ const ListView = () => {
 
         const fetchData = async () => {
             try {
-                let url = `${baseUrl}event?`;
-             
-                if (defaults.Categories.map((i:string)=>i.toLowerCase()).includes(category as any)) {
-                    url += "category=" + category
+                const myUrlWithParams = new URL(baseUrl + "event");
+                if (typeof keyword !== "undefined" && keyword.length > 0) {
+                    myUrlWithParams.searchParams.append("keyword", keyword);
                 }
-                //console.log(url);
+                if (defaults.Categories.map((i:string)=>i.toLowerCase()).includes(category as any)) {
+                    myUrlWithParams.searchParams.append("category", category!);
+                }
+                if (typeof sort !== "undefined" && sort.length > 0) {
+                    if (sort == "freshness")
+                        myUrlWithParams.searchParams.append("sort", "createdAt");
+                    else if (sort == "attendees")
+                        myUrlWithParams.searchParams.append("sort", "attendance");
+                    
+                }
+                const response = await axios.get(myUrlWithParams.href, { withCredentials: true });
+                //console.log("Hello: " + myUrlWithParams.href);
 
-                const response = await axios.get(url, {withCredentials: true});
                 setEventData(response.data.data);
             } catch (error) {
                 //console.log(error);

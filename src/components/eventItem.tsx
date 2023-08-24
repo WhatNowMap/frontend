@@ -15,8 +15,13 @@ interface EvenItemProps {
     likes: number,
     dislikes: number,
     time: number, 
-    bookmark: boolean,
+    bookmark:boolean,
+    onBookmarkToggle?: () => void;
+    toggleBookmark?: () => void;
 }
+
+
+
 
 const EventItem = (props: EvenItemProps) => {
     const timediff:number = (Date.now()-props.time)/1000;
@@ -33,19 +38,25 @@ const EventItem = (props: EvenItemProps) => {
         timelapse = hr == 1 ? "1 hr ago" : hr + " hrs ago";
     }
 
+    const handleBookmarkToggle = () => {
+        if (props.onBookmarkToggle) {
+            props.onBookmarkToggle();
+        }
+    }
+
     const content = (
         <>
             <div className="w-1/3 h-24 bg-secondary-500 me-2">
                 <img src={props.image ? props.image : "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Toronto_Skyline_Summer_2020.jpg/320px-Toronto_Skyline_Summer_2020.jpg"} className="w-full h-24 object-cover" />
             </div>
             <div className="w-2/3 flex flex-col text-secondary-900 relative">
-                <div className="absolute top-0 right-0">
-                    {
-                    props.bookmark 
-                    ? <img src={icon_bookmark_on} />
-                    : <img src={icon_bookmark_off} />
-                    }
-                </div>
+            <div className="absolute top-0 right-0" onClick={props.onBookmarkToggle}>
+    { props.bookmark 
+        ? <img src={icon_bookmark_on} alt="Bookmarked" />
+        : <img src={icon_bookmark_off} alt="Not Bookmarked" />
+    }
+</div>
+
                 <div className="text-xs text-secondary-300">{props.category}</div>
                 <div className="font-bold text-secondary-100">{props.title}</div>
                 <div className="text-[8pt] text-secondary-300">

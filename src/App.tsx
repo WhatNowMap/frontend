@@ -30,8 +30,8 @@ const router = createBrowserRouter(
       <Route path="/profile" element={<UserProfile />} />
       <Route path="*" element={<NotFound />} />
       <Route path="/event/create-event" element={<CreateEvent />} />
-      <Route path='/eventHistory' element={<ViewEventHistory />}
-      />
+      <Route path='/eventHistory' element={<ViewEventHistory />}/>
+      <Route path='/bookmark' element={<Bookmark />}/>
     </Route>
   )
 

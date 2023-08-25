@@ -10,7 +10,7 @@ const Carousels = () => {
         <div>
         <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
             <SwiperSlide>
-                <img src={""}/>
+                
             </SwiperSlide>
         </Swiper>
         </div>

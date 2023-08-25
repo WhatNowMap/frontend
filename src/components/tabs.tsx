@@ -2,15 +2,20 @@ import { TabPanel, useTabs } from "react-headless-tabs";
 import { TabSelector } from "./tabSelector";
 import Comments from "./comment";
 import Icon from "./icon";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
+import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from 'mapbox-gl'
+mapboxgl.accessToken =
+  'pk.eyJ1Ijoid2hhdG5vd21hcCIsImEiOiJjbGw0Nnk1aTkwMXIxM2VwMGpiN3RmZ3Y5In0.O5vq93APpSPPQgPHc9VC6g';
 
 interface EvenDetailsProps {
     category: string,
     description: string,
-    lag: string,
-    lng: string,
+    lag: number,
+    lng: number,
     location: string,
+    comment: any,
     time: number,
 }
 
@@ -20,6 +25,25 @@ const Tabs = (props:EvenDetailsProps) => {
     const togglePopup = () => {
       setIsOpen(!isOpen);
     }
+
+    const mapContainer = useRef(null);
+    const map = useRef(null);
+    const [zoom, setZoom] = useState(8);
+    const [comment, setComment] = useState([]);
+
+    useEffect(() => {
+        setComment(props.comment);
+        (map.current! as mapboxgl.Map) = new mapboxgl.Map({
+            container: mapContainer.current!,
+            style: 'mapbox://styles/mapbox/streets-v12',
+            center: [props.lng, props.lag],
+            zoom: zoom,
+            attributionControl: false
+        }); 
+        const marker = new mapboxgl.Marker({color: "#7958B0"})
+        .setLngLat([props.lng, props.lag])
+        .addTo(map.current!);
+    },[props.lag, props.comment]);
 
     return(
         <div>
@@ -82,23 +106,30 @@ const Tabs = (props:EvenDetailsProps) => {
                             </div>
                         </div>
                     </div>
-                    <div className="bg-primary-400 w-full h-60">
-                        {props.lag}{props.lng}
+                    <div className="w-full h-60">
+                            <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
+
+                            <div ref={mapContainer} className="map-container h-full w-full" />
                     </div>
                 </TabPanel>
                 <TabPanel hidden={selectedTab !== "comments"}>
                     <div className="p-6 border-b-[1px] border-white z-50">
                         <div className="text-xl font-bold">Reviews</div>
-                        <Comments
-                            username="User"
-                            profileImg="../src/assets/images/icon-profile.svg"
-                            likes={4}
-                            time={123}
-                            comment="Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
-                        />
-
+                        {comment != null &&
+                            <div>
+                            {Object.keys(comment).map((item, i) => (
+                                <Comments
+                                    key={i}
+                                    username={comment[item].user}
+                                    profileImg=""
+                                    comment={comment[item].comment}
+                                    time={0}
+                                    likes={comment[item].mediaIds}
+                                />
+                            ))}
+                            </div>
+                        }
                     </div>
-                    
                     <form className="flex">
                         <input type="text" 
                             className="w-full py-4 px-3 text-secondary-400 bg-[#404040] rounded-none focus:outline-none" 

@@ -17,6 +17,19 @@ const ListView = () => {
   const [formSort, setFormSort] = useState(sort);
   const navigate = useNavigate();
   const [eventData, setEventData] = useState([]);
+  const toggleBookmark = async (eventId: string, currentlyBookmarked: boolean) => {
+    try {
+        const endpoint = currentlyBookmarked ? `${baseUrl}user/bookmarks/{event_id}/` : `${baseUrl}user/bookmarks/`;
+        const response = await axios.post(endpoint, { eventId }, { withCredentials: true });
+        
+        if (response.status === 200) {
+            // Fetch updated list (or you can optimistically update the UI here)
+            fetchData();
+        }
+    } catch (error) {
+        console.error("Error toggling bookmark:", error);
+    }
+};
 
     useEffect(() => {
 
@@ -116,7 +129,10 @@ const ListView = () => {
             <TabBar highlight="list"/>
         </div>
     )
-
 }
  
 export default ListView;
+function fetchData() {
+  throw new Error("Function not implemented.");
+}
+

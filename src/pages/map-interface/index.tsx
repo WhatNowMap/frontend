@@ -7,6 +7,8 @@ import axios from 'axios';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
+import { onEnterRoute } from "../../helpers/AuthHelper";
+import { timestamp2Elapsed, isodate2Timestamp } from "../../utils/helper";
 const baseUrl = import.meta.env.VITE_REACT_APP_BASEURL
 
 mapboxgl.accessToken =
@@ -15,6 +17,7 @@ mapboxgl.accessToken =
 let mapMarkers: mapboxgl.Marker[] = [];
 
 const MapView = () => {
+    onEnterRoute();
     let {keyword, category} = useParams();
     const [formKeyword, setFormKeyword] = useState(keyword);
     const [formCategory, setFormCategory] = useState(category);
@@ -41,7 +44,8 @@ const MapView = () => {
                 container: mapContainer.current!,
                 style: 'mapbox://styles/mapbox/streets-v12',
                 center: [lng, lat],
-                zoom: zoom
+                zoom: zoom,
+                attributionControl: false
             });
         }
 
@@ -50,18 +54,73 @@ const MapView = () => {
 
         const fetchData = async () => {
             try {
-                let url = `${baseUrl}event?`;
-                if (defaults.Categories.map((i:string)=>i.toLowerCase()).includes(category as any)) {
-                    url += "category=" + category
+                const myUrlWithParams = new URL(baseUrl + "event");
+                if (typeof keyword !== "undefined" && keyword.length > 0) {
+                    myUrlWithParams.searchParams.append("keyword", keyword!);
                 }
-
-                const response = await axios.get(url, { withCredentials: true });
-                //console.log(url);
+                if (defaults.Categories.map((i:string)=>i.toLowerCase()).includes(category as any)) {
+                    myUrlWithParams.searchParams.append("category", category!);
+                }
+                const response = await axios.get(myUrlWithParams.href, { withCredentials: true });
+                //console.log("Hello: " + myUrlWithParams.href);
 
                 response.data.data.map((event: any) => {
+                    const elapsedTime = timestamp2Elapsed(isodate2Timestamp(event["createdAt"]));
+
+                    const popupContent = `
+                        <div class="flex flex-col">
+                            <div class="h-24 bg-secondary-500">
+                                <img 
+                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Toronto_Skyline_Summer_2020.jpg/320px-Toronto_Skyline_Summer_2020.jpg"
+                                    class="w-full h-24 object-cover" />
+                            </div>
+                            <div class="mt-2 mb-0 text-xs text-secondary-300">${event["category"]}</div>
+                            <div class="mt-0 mb-1 text-lg text-secondary-100 font-bold">${event["name"]}</div>
+
+                            <div class="text-[8pt] text-secondary-300">
+                                <img class="h-4 mt-1 float-left me-1"  src="/images/icon-location-logo.svg" />
+                                ${event["location"]}
+                            </div>
+                            <div class="w-full h-full flex flex-row grow items-end">
+                                <div class="flex flex-row items-center me-4">
+                                    <img class="h-3 w-3" src="/images/icon-thumb-up.svg" />
+                                    <div class="text-xs ms-1 text-secondary-200">${(event["ranking"])["like"]}</div>
+                                </div>
+                                <div class="flex flex-row items-center me-4">
+                                    <img class="h-3 w-3" src="/images/icon-thumb-down.svg" />
+                                    <div class="text-xs ms-1 text-secondary-200">${(event["ranking"])["dislike"]}</div>
+                                </div>
+                                <div class="text-end text-sm grow text-secondary-200">
+                                    ${elapsedTime}
+                                </div>
+                            </div>
+
+                            <a href="/event/${event["_id"]}" class="bg-primary-500 hover:bg-primary-700 text-white font-bold mt-2 py-2 px-4 rounded inline-flex items-center outline-none">
+                                <svg class="fill-current w-4 h-4 mr-2"  viewBox="0 0 128 128" id="Layer_1" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g>
+                                    <path d="M109,55c0-29.8-24.2-54-54-54C25.2,1,1,25.2,1,55s24.2,54,54,54c13.5,0,25.8-5,35.2-13.1l25.4,25.4l5.7-5.7L95.9,90.2   C104,80.8,109,68.5,109,55z M55,101C29.6,101,9,80.4,9,55S29.6,9,55,9s46,20.6,46,46S80.4,101,55,101z"/>
+                                    <path d="M25.6,30.9l6.2,5.1C37.5,29,46,25,55,25v-8C43.6,17,32.9,22.1,25.6,30.9z"/>
+                                    <path d="M17,55h8c0-2.1,0.2-4.1,0.6-6.1l-7.8-1.6C17.3,49.8,17,52.4,17,55z"/>
+                                    </g>
+                                </svg>
+                                <span>Event Details</span>
+                            </a>
+
+                            
+                        </div>
+                    `;
+
                     //console.log(event.lng, event.lag);
-                    const marker = new mapboxgl.Marker()
+                    const marker = new mapboxgl.Marker({color: "#7958B0"})
                         .setLngLat([event.lng, event.lag])
+                        .setPopup(
+                            new mapboxgl.Popup({ 
+                                    className: "map-popup",
+                                    offset: 25,
+                                    closeButton: false
+                                    }) // add popups
+                                .setHTML(popupContent)
+                          )
                         .addTo(map.current!);
                     mapMarkers.push(marker);
                 });
@@ -115,7 +174,7 @@ const MapView = () => {
         <div className="flex flex-col h-[100dvh] max-h-[100dvh]">
             <SearchBar keyword={keyword} onSearch={handleSearch} onCategoryChange={handleCategoryChange} sort={false} />
             
-            <div className="flex-grow overflow-y-scroll no-scrollbar mt-[3.25rem] mb-12 z-10">
+            <div className="flex-grow overflow-y-scroll no-scrollbar mt-[2.75rem] mb-12 z-10">
                 <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
 
                 <div ref={mapContainer} className="map-container h-full w-full" />

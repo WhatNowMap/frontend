@@ -4,6 +4,7 @@ import icon_bookmark_on from "../assets/images/icon-bookmark-on.svg"
 import icon_location_logo from "../assets/images/icon-location-logo.svg"
 import icon_thumb_down from "../assets/images/icon-thumb-down.svg"
 import icon_thumb_up from "../assets/images/icon-thumb-up.svg"
+import { timestamp2Elapsed } from "../utils/helper"
 
 
 interface EvenItemProps {
@@ -24,19 +25,7 @@ interface EvenItemProps {
 
 
 const EventItem = (props: EvenItemProps) => {
-    const timediff:number = (Date.now()-props.time)/1000;
-    let timelapse:string = "";
-
-    if (timediff < 2*60) {
-        timelapse = "a moment ago";
-    }
-    else if (timediff < 60*60) {
-        timelapse = Math.floor(timediff/60) + " mins ago"
-    }
-    else {
-        const hr = Math.floor(timediff/60/60);
-        timelapse = hr == 1 ? "1 hr ago" : hr + " hrs ago";
-    }
+    let timelapse:string = timestamp2Elapsed(props.time);
 
     const handleBookmarkToggle = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
         event.preventDefault();

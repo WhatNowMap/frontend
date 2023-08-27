@@ -2,19 +2,22 @@ import Icon from "./icon"
 import Carousel from "./carousel";
 import Tabs from "./tabs";
 
+
 interface EvenDetailsProps {
     attendance: number,
     category: string,
     description: string,
-    lag: string,
-    lng: string,
+    lag: number,
+    lng: number,
     location: string,
     name: string,
     like: number,
     dislike: number,
+    comment: any,
     time: number,
 }
 
+window.location.href
 const EventDetail = (props:EvenDetailsProps) => {
 
     return(
@@ -30,7 +33,7 @@ const EventDetail = (props:EvenDetailsProps) => {
                             <Icon type={"bookmark"} className="w-7 h-7 mr-1 text-secondary-100 "/>
                         </div>
                         <div>
-                            <Icon type={"share"} className="w-7 h-7 mr-1 text-secondary-100"/>
+                            <Icon type={"share"} className="w-7 h-7 mr-1 text-secondary-100 "/>
                         </div>
                     </div>
                 </div>
@@ -59,6 +62,7 @@ const EventDetail = (props:EvenDetailsProps) => {
                     lag={props.lag}
                     lng={props.lng}
                     location={props.location}
+                    comment={props.comment}
                     time={1}
                 />
             </div>

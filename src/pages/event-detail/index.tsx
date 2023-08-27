@@ -1,4 +1,5 @@
 import TabBar from "../../components/tabBar";
+import Header from "../../components/header";
 import EventDetails from "../../components/eventDetail";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -9,49 +10,74 @@ interface EvenDetailsProps {
     attendance: number,
     category: string,
     description: string,
-    lag: string,
-    lng: string,
+    lag: number,
+    lng: number,
     location: string,
     name: string,
-    ranking: any,
+    like: number,
+    dislike: number,
     time: number,
+}
+
+interface RankingProps {
+    like: number,
+    dislike: number
+}
+
+interface CommentProps {
+    comment: any
 }
 
 
 const EventDetail = () => {
     const urlID = useParams();
     const eventID = urlID.event_id
+    const [eventRanking, setEventRanking] = useState<RankingProps>({like: 0, dislike: 0})
+    const [eventComment, setEventComment] = useState<CommentProps>()
     const [eventData, setEventData] = useState<EvenDetailsProps>({
         attendance: 0,
         category: "",
         description: "",
-        lag: "",
-        lng: "",
+        lag: 0,
+        lng: 0,
         location: "",
         name: "",
-        ranking: {},
+        like: 0,
+        dislike: 0,
         time: 0,
-    });
+    }); 
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                var urlWithoutPort = baseUrl
-                let url = urlWithoutPort + "event/" + eventID;
+                let url = baseUrl + "event/" + eventID;
                 const response = await axios.get(url, { withCredentials: true });
-                console.log(response.data.data)
+                setEventRanking((response.data.data).ranking);
                 setEventData(response.data.data);
             } catch (error) {
-
+                //console.log(error)
+            }
+        }
+        const fetchComment = async () => {
+            try {
+                let url = baseUrl + "comment/event/" + eventID;
+                const response = await axios.get(url, { withCredentials: true });
+                setEventComment(response.data)
+            } catch (error) {
+                //console.log(error)
             }
         }
         fetchData();
-
+        fetchComment();
     }, []);
 
 
     return(
          <div className="flex flex-col h-[100dvh] max-h-[100dvh]">
+            <Header 
+            Header_title={""} 
+            arrow={true}
+            />
             <div className="flex-grow overflow-y-scroll no-scrollbar mb-14">
                 <EventDetails
                     attendance={eventData.attendance}
@@ -61,8 +87,9 @@ const EventDetail = () => {
                     lng={eventData.lng}
                     location={eventData.location}
                     name={eventData.name}
-                    like={eventData.like}
-                    dislike={eventData.dislike}
+                    like={eventRanking.like}
+                    dislike={eventRanking.dislike}
+                    comment={eventComment}
                     time={1}
                 />
             </div>

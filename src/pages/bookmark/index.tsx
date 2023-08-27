@@ -62,7 +62,7 @@ const BookmarkView = () => {
     
     const bookmarkEvent = async (eventId, action) => {
         try {
-            const url = `${baseUrl}/user/bookmarks/${eventId}/${action === 'bookmark' ? 1 : 0}`;
+            const url = `${baseUrl}user/bookmarks/${eventId}/${action === 'bookmark' ? 1 : 0}`;
             const response = await axios.post(url, {}, { withCredentials: true });
             return response.data;
         } catch (error) {
@@ -73,7 +73,7 @@ const BookmarkView = () => {
     
     const getUserBookmarks = async () => {
         try {
-            const url = `${baseUrl}/user/bookmarks`;
+            const url = `${baseUrl}user/bookmarks`;
             console.log("Bookmark details"+ url)
             const response = await axios.get(url, { withCredentials: true });
             return response.data;
